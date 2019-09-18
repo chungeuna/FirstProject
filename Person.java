@@ -6,6 +6,6 @@ public class Person {
 	int closeLevel;
 	int spendSumMoney;
 	int getSumMoney;
-	HashMap<Event> eventMap;
+	HashMap<String, Event> eventMap;
 
 }	
