@@ -44,6 +44,9 @@ class Person implements IInfoManager {
 		int money = Integer.parseInt(scan.nextLine());
 		System.out.println("경조사 종류를 입력하세요 : ");
 		String kindOfEvent = scan.nextLine();
+		
+		
+		
 		eventMap.put(count++, new Event(date, money, kindOfEvent));
 		
 		if(money < 0) {
@@ -55,6 +58,24 @@ class Person implements IInfoManager {
 
 	@Override
 	public void modifyInfo() {
+		for(Map.Entry m : eventMap.entrySet()) {
+			System.out.println("번호 : " + m.getKey() + " / " + (Event)m.getValue());
+		}
+		System.out.println("금액을 수정하고 싶은 이벤트 번호를 입력하세요");
+		int inputNumber = scan.nextInt();
+		scan.nextLine();
+		System.out.println("수정할 금액을 입력하세요");
+		System.out.println("지출한 금액: ");
+		int outmoney = scan.nextInt();
+		scan.hasNextLine();
+		
+		System.out.println("들어온 금액: ");
+		int inmoney = scan.nextInt();
+		
+		
+		
+		eventMap.get(inputNumber).setGetMoney(inmoney);
+		eventMap.get(inputNumber).setSpendMoney(outmoney);
 		
 	}
 
@@ -79,13 +100,13 @@ class Person implements IInfoManager {
 
 	@Override
 	public void removeInfo() {
-		Set set = eventMap.keySet();
-		Iterator it = set.iterator();
+		//Set set = eventMap.keySet();
+		//Iterator it = set.iterator();
 		//while(it.hasNext()) {
 		//	System.out.println(eventMap.get(it.next()));
 		//}
 		for(Map.Entry m : eventMap.entrySet()) {
-			System.out.println("번호 : " + m.getKey() + " " + (Event)m.getValue());
+			System.out.println("번호 : " + m.getKey() + " / " + (Event)m.getValue());
 		}
 		System.out.println("지울 이벤트 번호를 입력하세요!");
 		int inputNumber = scan.nextInt();
