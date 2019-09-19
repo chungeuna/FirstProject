@@ -7,8 +7,8 @@ import java.util.Set;
 
 class Person implements IInfoManager {
 	Scanner scan = new Scanner(System.in);
-	int count;
 	String name;//
+	int count;
 	// String phoneNumber;//
 	int closeLevel;//
 	int spendSumMoney;//
@@ -29,11 +29,11 @@ class Person implements IInfoManager {
 	}
 
 	void getSum() {
-
+		System.out.println(this.name + "님이 나에게 준 총 금액 : " + this.getSumMoney);
 	}
 
 	void spendSum() {
-
+		System.out.println(this.name + "님에게 받은 총 금액 : " + this.spendSumMoney);
 	}
 
 	@Override
@@ -45,6 +45,12 @@ class Person implements IInfoManager {
 		System.out.println("경조사 종류를 입력하세요 : ");
 		String kindOfEvent = scan.nextLine();
 		eventMap.put(count++, new Event(date, money, kindOfEvent));
+		
+		if(money < 0) {
+			this.spendSumMoney += money;
+		}else {
+			this.getSumMoney += money;
+		}
 	}
 
 	@Override
@@ -57,11 +63,7 @@ class Person implements IInfoManager {
 		System.out.println("검색할 날짜를 입력하세요 : ");
 		String date = scan.nextLine();
 		ArrayList<Event> alist = new ArrayList<Event>();
-		// if(eventMap.containsValue()) {
-		// System.out.println("data 잘 나옴");
-		// }else {
-		// System.out.println("여기는 else");
-		// }
+		
 		for (int i = 0; i < eventMap.size(); i++) {
 			if ((eventMap.get(i).date.equals(date))) {
 				alist.add(eventMap.get(i));
@@ -79,15 +81,15 @@ class Person implements IInfoManager {
 	public void removeInfo() {
 		Set set = eventMap.keySet();
 		Iterator it = set.iterator();
-		while(it.hasNext()) {
-			System.out.println("번호: " + eventMap.get(it.next()));
+		//while(it.hasNext()) {
+		//	System.out.println(eventMap.get(it.next()));
+		//}
+		for(Map.Entry m : eventMap.entrySet()) {
+			System.out.println("번호 : " + m.getKey() + " " + (Event)m.getValue());
 		}
 		System.out.println("지울 이벤트 번호를 입력하세요!");
 		int inputNumber = scan.nextInt();
-		eventMap.keySet().remove((inputNumber));	// 간접적으로 접근
-		for(int i = 0; i < eventMap.size(); i++) {
-			System.out.println(eventMap.get(i));
-		}
+		eventMap.keySet().remove((inputNumber)); // 간접적으로 접근
+		System.out.println("삭제 되었습니다");
 	}
-
 }
