@@ -5,7 +5,6 @@ public class PersonManager {
 	Scanner scan;
 	private HashMap<String,Person> personMap;
 	Person person;
-	EventManager eventManager;
 	private int password;
 	private int spendTotalSum;
 	int getTotalSum;
@@ -15,7 +14,6 @@ public class PersonManager {
 		scan = new Scanner(System.in);
 		personMap = new HashMap<String,Person>(); // 지인 정보 저장
 		person = new Person();
-		eventManager = new EventManager();
 	}
 	void inputPersonInfo() {
 		System.out.println("이름을 입력하세요 : ");
