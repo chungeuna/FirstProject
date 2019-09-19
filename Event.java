@@ -17,7 +17,7 @@ class Event {
 	
 	@Override
 	public String toString() {
-		return "[kindOfEvent : " + kindOfEvent + ", getMoney : " + getMoney + ", spendMoney : " + spendMoney + ", date : "
+		return "[행사종류 : " + kindOfEvent + ", 받은 금액 : " + getMoney + "원, "+ "  지출한 금액 : " + spendMoney + "원"+ ", date : "
 				+ date + "]";
 	}
 	
@@ -33,6 +33,5 @@ class Event {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
 	
 }

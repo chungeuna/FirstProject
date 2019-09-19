@@ -1,31 +1,29 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 class Person implements IInfoManager {
 	Scanner scan = new Scanner(System.in);
 	String name;//
+	String phoneNumber;
 	int count;
-	// String phoneNumber;//
+	// String phoneNumber;// 살려야 되는거 아님?
 	int closeLevel;//
 	int spendSumMoney;//
 	int getSumMoney;//
-	HashMap<Integer, Event> eventMap = new HashMap<Integer, Event>();//
+	ArrayList<Event> eventlist = new ArrayList<Event>();//
 	Event event;
 
 	Person() {
 
 	}
 
-	Person(String name, int closeLevel) {
+	Person(String name, int closeLevel, String phoneNumber) {
 		this.name = name;
 		this.closeLevel = closeLevel;
+		this.phoneNumber = phoneNumber;
 		count = 0;
-		event = new Event();
-		// eventMap = new HashMap<Integer, Event>();
 	}
 
 	void getSum() {
@@ -47,7 +45,7 @@ class Person implements IInfoManager {
 		
 		
 		
-		eventMap.put(count++, new Event(date, money, kindOfEvent));
+		eventlist.add(new Event(date, money, kindOfEvent));
 		
 		if(money < 0) {
 			this.spendSumMoney += money;
@@ -58,8 +56,8 @@ class Person implements IInfoManager {
 
 	@Override
 	public void modifyInfo() {
-		for(Map.Entry m : eventMap.entrySet()) {
-			System.out.println("번호 : " + m.getKey() + " / " + (Event)m.getValue());
+		for(int i =0; i < eventlist.size(); i++) {
+			System.out.println("번호 : " + i + " / " + eventlist.get(i));
 		}
 		System.out.println("금액을 수정하고 싶은 이벤트 번호를 입력하세요");
 		int inputNumber = scan.nextInt();
@@ -74,8 +72,8 @@ class Person implements IInfoManager {
 		
 		
 		
-		eventMap.get(inputNumber).setGetMoney(inmoney);
-		eventMap.get(inputNumber).setSpendMoney(outmoney);
+		eventlist.get(inputNumber).setGetMoney(inmoney);
+		eventlist.get(inputNumber).setSpendMoney(outmoney);
 		
 	}
 
@@ -85,12 +83,12 @@ class Person implements IInfoManager {
 		String date = scan.nextLine();
 		ArrayList<Event> alist = new ArrayList<Event>();
 		
-		for (int i = 0; i < eventMap.size(); i++) {
-			if ((eventMap.get(i).date.equals(date))) {
-				alist.add(eventMap.get(i));
+		for (int i = 0; i < eventlist.size(); i++) {
+			if ((eventlist.get(i).date.equals(date))) {
+				alist.add(eventlist.get(i));
 			}
 		}
-
+		
 		if (alist.size() == 0) {
 			System.out.println("해당 날짜의 정보가 없습니다");
 		} else {
@@ -100,17 +98,22 @@ class Person implements IInfoManager {
 
 	@Override
 	public void removeInfo() {
-		//Set set = eventMap.keySet();
-		//Iterator it = set.iterator();
-		//while(it.hasNext()) {
-		//	System.out.println(eventMap.get(it.next()));
-		//}
-		for(Map.Entry m : eventMap.entrySet()) {
-			System.out.println("번호 : " + m.getKey() + " / " + (Event)m.getValue());
+		for(int i=0; i < eventlist.size(); i++) {
+			System.out.println("번호 : " + i + " / " + eventlist.get(i));
 		}
 		System.out.println("지울 이벤트 번호를 입력하세요!");
 		int inputNumber = scan.nextInt();
-		eventMap.keySet().remove((inputNumber)); // 간접적으로 접근
+		eventlist.remove(inputNumber); // 간접적으로 접근
 		System.out.println("삭제 되었습니다");
+	}
+	
+	public void showAllEvent() {
+		for(Event e : eventlist) {
+			System.out.println(e);
+		}
+	}
+
+	public void setCloseLevel(int closeLevel) {
+		this.closeLevel = closeLevel;
 	}
 }

@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class Main {
 	HashMap<String, String> userMap = new HashMap<String, String>();
-	Scanner sc = new Scanner(System.in);
+	Scanner scan = new Scanner(System.in);
 	User user;
 
 	void signIn() { // 회원가입시 아이디와 패스워드를 받는다
@@ -14,10 +14,10 @@ public class Main {
 			System.out.println("이메일로 가입하세요.");
 			System.out.print("아이디 : ");
 			user = new User();
-			user.setId(sc.nextLine().trim());
+			user.setId(scan.nextLine().trim());
 			System.out.println("8자리 이상 영문자와 숫자로 만드세요.");
 			System.out.print("패스워드 : ");
-			user.setPassword(sc.nextLine().trim());
+			user.setPassword(scan.nextLine().trim());
 			if (!user.valID(user.getId())) {
 				System.out.println("형식에 맞지 않는 아이디입니다. 다시 입력하세요.");
 
@@ -37,17 +37,26 @@ public class Main {
 		System.out.println("아이디와 패스워드를 입력하세요.");
 		while (true) {
 			System.out.print("아이디 : ");
-			String inputId = sc.nextLine();
+			String inputId = scan.nextLine();
 			System.out.println("패스워드 : ");
-			String inputPassword = sc.nextLine();
+			String inputPassword = scan.nextLine();
 			if (!userMap.containsKey(inputId)) {
 				System.out.println("존재하지 않는 회원입니다.");
 			} else if (!userMap.get(inputId).equals(inputPassword)) {
 				System.out.println("비밀번호가 일치하지 않습니다.");
 			} else {
 				System.out.println("로그인 되었습니다.");
+				// 자동 로드 .. 
 				break;
 			}
 		}
+	}
+	void setPassword() {
+		System.out.println("아이디를 입력해주세요");
+		String id = scan.nextLine();
+		System.out.println("변경할 비밀번호를 입력하세요");
+		String password = scan.nextLine();
+		userMap.put(id, password);
+		System.out.println("변경되었습니다");
 	}
 }
