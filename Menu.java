@@ -2,12 +2,14 @@ import java.util.Scanner;
 
 public class Menu {
 	Scanner sc = new Scanner(System.in);
-	PersonManager personManager = new PersonManager();
+	PersonManager personManager;
+	Main main;
+	
 
 	int selectMainDisplay() {
-		System.out.println("─────────────────────");
+		System.out.println("─────────────────────────────");
 		System.out.println("1:회원가입     2:로그인     3:프로그램 종료");
-		System.out.println("─────────────────────");
+		System.out.println("─────────────────────────────");
 
 		int menu = 0;
 		do {
@@ -29,9 +31,9 @@ public class Menu {
 	void showMainDisplay() {
 		while (true) {
 			switch (selectMainDisplay()) {
-			case 1:	// 회원가입 함수 호출
+			case 1:	main.signIn(); // 회원가입 함수 호출
 				break;
-			case 2:	// 로그인 함수 호출
+			case 2:	main.logIn(); // 로그인 함수 호출
 				break;
 			case 3:	System.out.println("프로그램 종료합니다");
 				System.exit(0);
@@ -65,17 +67,18 @@ public class Menu {
 	void showPersonManagerDisplay() {
 		while (true) {
 			switch (selectPersonManagerDisplay()) {
-			case 1:	// 전체지인목록출력
+			case 1:	personManager.showAllInfo(); // 전체지인목록출력
 				break;
-			case 2:	// 지인정보입력
+			case 2:	personManager.inputInfo(); // 지인정보입력
 				break;
-			case 3:	// 지인정보수정
+			case 3:	personManager.modifyInfo(); // 지인정보수정
 				break;
-			case 4:	// 지인정보삭제
+			case 4:	personManager.removeInfo(); // 지인정보삭제
 				break;
-			case 5:	// 비밀번호 변경
+			case 5:	main.setPassword(); // 비밀번호 변경
 				break;
-			case 0:	// 로그아웃 + (자동저장)
+			case 0:	 // 종료 (자동저장) 이건 알아서
+			
 				break;
 			default : 
 				System.out.println("잘못된 값을 입력하셨습니다.");
