@@ -49,7 +49,7 @@ class Person implements IInfoManager {
 
 	@Override
 	public void modifyInfo() {
-
+		
 	}
 
 	@Override
@@ -77,33 +77,17 @@ class Person implements IInfoManager {
 
 	@Override
 	public void removeInfo() {
-		for (int i=0; i<eventMap.size(); i++) {
-			System.out.println("for" + eventMap.get(i));
-			
-			//System.out.print(i+"번: 경조사 명 : " + eventMap.get(i).kindOfEvent+"\t"+ eventMap.get(i).date+"\t"+ eventMap.get(i).getMoney+"|"+eventMap.get(i).spendMoney+"\n");
-		}
 		Set set = eventMap.keySet();
 		Iterator it = set.iterator();
-		int c1=0;
 		while(it.hasNext()) {
-			System.out.println("번호: " + c1 + " " +eventMap.get(it.next()));
-			c1++;
-			
+			System.out.println("번호: " + eventMap.get(it.next()));
 		}
 		System.out.println("지울 이벤트 번호를 입력하세요!");
 		int inputNumber = scan.nextInt();
-		eventMap.remove(inputNumber);	// 간접적으로 접근
-		
-		
-		//for (int i=0; i<eventMap.size(); i++) {
-			//System.out.print(i+"번: 경조사 명 : " + eventMap.get(i).kindOfEvent+"\t"+ eventMap.get(i).date+"\t"+ eventMap.get(i).getMoney+"|"+eventMap.get(i).spendMoney+"\n");
-		//}
-		
-		// 지인 리스트(이름, 휴대폰번호 등 의 정보) 출력하는 함수 호출
-		
-		
-		
-
+		eventMap.keySet().remove((inputNumber));	// 간접적으로 접근
+		for(int i = 0; i < eventMap.size(); i++) {
+			System.out.println(eventMap.get(i));
+		}
 	}
 
 }
