@@ -3,9 +3,6 @@ class Event {
 	int getMoney;
 	int spendMoney;
 	String date;
-	int index;
-	
-	
 	//int price;
 	Event(String date, int money, String kindOfEvent){
 		this.kindOfEvent = kindOfEvent;
@@ -15,14 +12,26 @@ class Event {
 			this.getMoney = money;
 		}
 		this.date = date;
-		index++;
 	}
 	Event(){}
 	
 	@Override
 	public String toString() {
-		return "Event [kindOfEvent=" + kindOfEvent + ", getMoney=" + getMoney + ", spendMoney=" + spendMoney + ", date="
+		return "[kindOfEvent : " + kindOfEvent + ", getMoney : " + getMoney + ", spendMoney : " + spendMoney + ", date : "
 				+ date + "]";
+	}
+	
+	public void setKindOfEvent(String kindOfEvent) {
+		this.kindOfEvent = kindOfEvent;
+	}
+	public void setGetMoney(int getMoney) {
+		this.getMoney = getMoney;
+	}
+	public void setSpendMoney(int spendMoney) {
+		this.spendMoney = spendMoney;
+	}
+	public void setDate(String date) {
+		this.date = date;
 	}
 	
 	
