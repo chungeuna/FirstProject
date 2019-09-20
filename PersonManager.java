@@ -12,11 +12,18 @@ public class PersonManager implements IInfoManager {
 	//private String password;
 	private int spendTotalSum;
 	int getTotalSum;
+	Menu m;
 
 	PersonManager() {
 		scan = new Scanner(System.in);
 		personList = new ArrayList<Person>(); // 지인 정보 저장
+		m = new Menu();
 
+	}
+	
+	void menu() {
+		m.showPersonManagerDisplay();
+		//System.out.println("1.추가 2.삭제  3. 수정");
 	}
 
 	void inputPersonInfo() {
@@ -44,14 +51,54 @@ public class PersonManager implements IInfoManager {
 		}
 	}
 	
+
+	public void eventlist() {
+		System.out.println("지인의 이름을 입력하세요");
+		String name = scan.nextLine();
+
+		for (Person p : personList) {
+			if (p.name.equals(name)) {
+				p.showAllEvent();
+			}
+		}
+	}
+	
+	public void suggestMoney() {
+		System.out.println("지인의 이름을 입력하세요");
+		String name = scan.nextLine();
+		
+		for (Person p : personList) {
+			if (p.name.equals(name)) {
+				p.suggestMoney();
+			} else if (p.eventlist.isEmpty()) {
+				System.out.println("풜슨 뭬니저 써줴슽으 함수 안 신사임당 1장!");
+			}
+		}
+	}
+	
+	
 	public void getTotal() {
-		System.out.println((p.getTotalSum - p.spendTotalSum));
+		int sumOfexpense =0;
+		int sumOfincome =0;
+		for (Person p : personList) {
+			sumOfexpense+=p.spendSumMoney;
+			sumOfincome +=p.getSumMoney;
+			
+		}
+		this.getTotalSum = sumOfincome;
+		this.spendTotalSum = sumOfexpense;
+				
+		System.out.println("총 받은금액: " + getTotalSum);
+		System.out.println("총 지출한 금액: " + spendTotalSum);
 	}
 	
 	public void showAllInfo() {
-		for (int i = 0; i < personList.size(); i++) {
-			personList.get(i).showAllEvent();
+		for(int i =0; i < personList.size(); i++) {
+			System.out.println("번호 : " + i + " / " + personList.get(i));
 		}
+		//for (int i = 0; i < personList.size(); i++) {
+		//	personList.get(i).showAllEvent();
+		//}
 	}
 	
 	/*
@@ -77,6 +124,20 @@ public class PersonManager implements IInfoManager {
 
 	@Override
 	public void searchInfo() {
+		System.out.println("검색할 핸드폰 번호를 입력하세요 : ");
+		String phoneNumber = scan.nextLine();
+		ArrayList<Person> plist = new ArrayList<Person>();
+		
+		for (int i = 0; i < personList.size(); i++) {
+			if ((personList.get(i).phoneNumber.equals(phoneNumber))) {
+				plist.add(personList.get(i));
+			}
+		}
+		if (plist.size() == 0) {
+			System.out.println("해당 핸드폰 번호의 정보가 없습니다");
+		} else {
+			System.out.println(plist);
+		}
 		/*
 		 * System.out.println("검색할 날짜를 입력하세요 : "); String date = scan.nextLine();
 		 * ArrayList<Event> alist = new ArrayList<Event>();
@@ -91,6 +152,13 @@ public class PersonManager implements IInfoManager {
 
 	@Override
 	public void removeInfo() {
+		for(int i=0; i < personList.size(); i++) {
+			System.out.println("번호 : " + i + " / " + personList.get(i));
+		}
+		System.out.println("지울 이벤트 번호를 입력하세요!");
+		int inputNumber = scan.nextInt();
+		personList.remove(inputNumber); // 간접적으로 접근
+		System.out.println("삭제 되었습니다");
 		/*
 		 * Set set = eventMap.keySet(); Iterator it = set.iterator();
 		 * //while(it.hasNext()) { // System.out.println(eventMap.get(it.next())); //}
@@ -101,4 +169,10 @@ public class PersonManager implements IInfoManager {
 		 * System.out.println("삭제 되었습니다");
 		 */
 	}
+
+	public ArrayList<Person> getPersonList() {
+		return personList;
+	}
+	
+	
 }

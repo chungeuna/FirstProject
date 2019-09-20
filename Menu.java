@@ -2,74 +2,107 @@ import java.util.Scanner;
 
 public class Menu {
 	Scanner sc = new Scanner(System.in);
-	PersonManager personManager;
-	Main main;
+	//PersonManager personManager = new PersonManager();
 	
+	Main main = new Main();
 
-	Menu() {
-		boolean sholdExit = false;
-		while (true) {
-			System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
-			System.out.println("1:È¸¿ø°¡ÀÔ     2:·Î±×ÀÎ     3:ÇÁ·Î±×·¥ Á¾·á");
-			System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
-			int userInput = Integer.parseInt(sc.nextLine());
-			while (true) {
-				switch (userInput) {
-				case 1:	main.signIn(); // È¸¿ø°¡ÀÔ ÇÔ¼ö È£Ãâ
-					break;
-				case 2:	main.logIn(); // ·Î±×ÀÎ ÇÔ¼ö È£Ãâ
-					break;
-				case 3:	System.out.println("ÇÁ·Î±×·¥ Á¾·áÇÕ´Ï´Ù");
-					System.exit(0);
-				default : 
-					System.out.println("Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù.");
-				}
-			}
-		}
-	}
-	
 	
 	
 	int selectMainDisplay() {
-		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
-		System.out.println("1:È¸¿ø°¡ÀÔ     2:·Î±×ÀÎ     3:ÇÁ·Î±×·¥ Á¾·á");
-		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		System.out.println("1:È¸¿ø°¡ÀÔ     2:·Î±×ÀÎ    0:ÇÁ·Î±×·¥ Á¾·á");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
 
-		int menu = 0;
+		int menuUserInput = 0;
 		do {
 			try {
-				menu = Integer.parseInt(sc.nextLine());
-				if (menu >= 1 && menu <=3) {
+				menuUserInput = Integer.parseInt(sc.nextLine());
+				if (menuUserInput >= 0 && menuUserInput <=2) {
 					break;
 				} else {
 					throw new Exception("showMainDisplay() Method ¿¹¿Ü ¹ß»ý");
 				}
 			} catch (Exception e) {
 				System.out.println("¼±ÅÃ ¹®Á¦");
-				System.out.println("1~3¹ø±îÁö ¼±ÅÃ");
+				System.out.println("0~2¹ø±îÁö ¼±ÅÃ");
 			}
 		} while (true);		
-		return menu;		
+		return menuUserInput;		
 	}
 	
 	void showMainDisplay() {
 		while (true) {
 			switch (selectMainDisplay()) {
-			case 1:	main.signIn(); // È¸¿ø°¡ÀÔ ÇÔ¼ö È£Ãâ
+			case 1:	 this.main.signIn(); // È¸¿ø°¡ÀÔ ÇÔ¼ö È£Ãâ
 				break;
-			case 2:	main.logIn(); // ·Î±×ÀÎ ÇÔ¼ö È£Ãâ
+			case 2:	 this.main.logIn();// ·Î±×ÀÎ ÇÔ¼ö È£Ãâ
+					
+			
+				showPersonManagerDisplay();
 				break;
-			case 3:	System.out.println("ÇÁ·Î±×·¥ Á¾·áÇÕ´Ï´Ù");
+			case 0:	System.out.println("ÇÁ·Î±×·¥ Á¾·áÇÕ´Ï´Ù");
 				System.exit(0);
 			default : 
-				System.out.println("Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù.");
+				System.out.println("Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù. ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä.");
 			}
 		}
 	}
 	
+
 	int selectPersonManagerDisplay() {
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		System.out.println("1:ÁöÀÎ¸ñ·Ï Ãâ·Â 2:ÁöÀÎÁ¤º¸ ÀÔ·Â 3:ÁöÀÎÁ¤º¸ º¯°æ 4.ÁöÀÎÁ¤º¸»èÁ¦ 5.ÀÌº¥Æ® °ü¸® 6.ºñ¹Ð¹øÈ£º¯°æ 	0.·Î±×¾Æ¿ô");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		int menuUserInput = 0;
+		do {
+			try {
+				menuUserInput = Integer.parseInt(sc.nextLine());
+				if (menuUserInput >= 0 && menuUserInput <=6) {
+					break;
+				} else {
+					throw new Exception("selectPersonManagerDisplay() Method ¿¹¿Ü ¹ß»ý");
+				}
+			} catch (Exception e) {
+				System.out.println("¼±ÅÃ ¹®Á¦");
+				System.out.println("0~5¹ø±îÁö ¼±ÅÃ");
+			}
+		} while (true);		
+		return menuUserInput;		
+	}
+	
+	void showPersonManagerDisplay() {
+		boolean shouldExit  = false;
+		while (true) {
+			int userInput = selectPersonManagerDisplay();
+			switch (userInput) {
+			case 1:	this.main.pmMap.get(this.main.getLoginId()).showAllInfo();// ÀüÃ¼ÁöÀÎ¸ñ·ÏÃâ·Â
+				break;
+			case 2:	this.main.pmMap.get(this.main.getLoginId()).inputPersonInfo(); // ÁöÀÎÁ¤º¸ÀÔ·Â
+				break;
+			case 3:	this.main.pmMap.get(this.main.getLoginId()).modifyInfo();// ÁöÀÎÁ¤º¸¼öÁ¤
+				break;
+			case 4:	this.main.pmMap.get(this.main.getLoginId()).removeInfo(); // ÁöÀÎÁ¤º¸»èÁ¦
+				break;
+			case 5:	this.showEventManagingDisplay(); // ÀÌº¥Æ® °ü¸®
+				break;
+			case 6:	this.main.setPassword(); // ºñ¹Ð¹øÈ£ º¯°æ
+				break;
+			case 0:	 System.out.println("»ç¿ëÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù."); // ·Î±×¾Æ¿ô + (ÀÚµ¿ÀúÀå)
+				shouldExit = true;
+				break;
+			default : 
+				System.out.println("Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù. ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä.");
+			}
+			if (shouldExit) {
+				break;
+			}
+			
+		}
+	}
+
+	int selectEventManagingDisplay() {
 		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
-		System.out.println("1:ÀüÃ¼ÁöÀÎ¸ñ·Ï Ãâ·Â 2:ÁöÀÎÁ¤º¸ ÀÔ·Â 3:ÁöÀÎÁ¤º¸ º¯°æ 4.ÁöÀÎÁ¤º¸»èÁ¦ 5.ºñ¹Ð¹øÈ£ º¯°æ 0.·Î±×¾Æ¿ô");
+		System.out.println("1:ÀüÃ¼ ÀÌº¥Æ®¸ñ·Ï Ãâ·Â 2:ÀÌº¥Æ® ÀÔ·Â 3:ÀÌº¥Æ®Á¤º¸ º¯°æ 4.ÀÌº¥Æ® »èÁ¦  5.ÀûÁ¤°æÁ¶»çºñ Ãâ·Â 0.µÚ·Î°¡±â");
 		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
 		int menu = 0;
 		do {
@@ -82,51 +115,9 @@ public class Menu {
 				}
 			} catch (Exception e) {
 				System.out.println("¼±ÅÃ ¹®Á¦");
-				System.out.println("0~5¹ø±îÁö ¼±ÅÃ");
-			}
-		} while (true);		
-		return menu;		
-	}
-	
-	void showPersonManagerDisplay() {
-		while (true) {
-			switch (selectPersonManagerDisplay()) {
-			case 1:	personManager.showAllInfo(); // ÀüÃ¼ÁöÀÎ¸ñ·ÏÃâ·Â
-				break;
-			case 2:	personManager.inputInfo(); // ÁöÀÎÁ¤º¸ÀÔ·Â
-				break;
-			case 3:	personManager.modifyInfo(); // ÁöÀÎÁ¤º¸¼öÁ¤
-				break;
-			case 4:	personManager.removeInfo(); // ÁöÀÎÁ¤º¸»èÁ¦
-				break;
-			case 5:	main.setPassword(); // ºñ¹Ð¹øÈ£ º¯°æ
-				break;
-			case 0:	 // Á¾·á (ÀÚµ¿ÀúÀå) ÀÌ°Ç ¾Ë¾Æ¼­
-			
-				break;
-			default : 
-				System.out.println("Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù.");
-			}
-		}
-	}
-	int selectEventManagingDisplay() {
-		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
-		System.out.println("1:ÀüÃ¼ ÀÌº¥Æ®¸ñ·Ï Ãâ·Â 2:ÀÌº¥Æ® ÀÔ·Â 3:ÀÌº¥Æ®Á¤º¸ º¯°æ 4.ÀÌº¥Æ® »èÁ¦  0.µÚ·Î°¡±â");
-		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
-		int menu = 0;
-		do {
-			try {
-				menu = Integer.parseInt(sc.nextLine());
-				if (menu >= 0 && menu <=4) {
-					break;
-				} else {
-					throw new Exception("selectPersonManagerDisplay() Method ¿¹¿Ü ¹ß»ý");
-				}
-			} catch (Exception e) {
-				System.out.println("¼±ÅÃ ¹®Á¦");
 				System.out.println("0~4¹ø±îÁö ¼±ÅÃ");
 			}
-		} while (true);		
+		} while (true);	
 		return menu;		
 	}
 	
@@ -134,23 +125,27 @@ public class Menu {
 		boolean shouldExit = false;
 		while (true) {
 			switch (selectEventManagingDisplay()) {
-			case 1:	// 1:ÀüÃ¼ ÀÌº¥Æ®¸ñ·Ï Ãâ·Â
+			case 1:	this.main.pmMap.get(this.main.getLoginId()).eventlist();// 1:ÀüÃ¼ ÀÌº¥Æ®¸ñ·Ï Ãâ·Â
 				break;
-			case 2:	// 2:ÀÌº¥Æ® ÀÔ·Â
+			case 2: this.main.pmMap.get(this.main.getLoginId()).inputInfo();// 2:ÀÌº¥Æ® ÀÔ·Â
+			// 2:ÀÌº¥Æ® ÀÔ·Â
 				break;
-			case 3:	// 3:ÀÌº¥Æ®Á¤º¸ º¯°æ
+			case 3:	this.main.pmMap.get(this.main.getLoginId()).modifyInfo();// 3:ÀÌº¥Æ®Á¤º¸ º¯°æ
 				break;
-			case 4:	// 4.ÀÌº¥Æ® »èÁ¦ 
+			case 4:	this.main.pmMap.get(this.main.getLoginId()).removeInfo(); // 4.ÀÌº¥Æ® »èÁ¦ 
 				break;
-			case 0:	 //  0.µÚ·Î°¡±â
+			case 5:	this.main.pmMap.get(this.main.getLoginId()).suggestMoney();	 // 5.ÀûÁ¤ °æº¸»çºñ Ãâ·Â 
+			break;
+			
+			case 0:	// 0. µÚ·Î°¡±â
 				shouldExit = true;
 				break;
 			default : 
-				System.out.println("Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù.");
+				System.out.println("Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù. ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä.");
 			}
 			if (shouldExit){
 				break;
 			}
-		}
+		}//
 	}
 }

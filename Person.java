@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 class Person implements IInfoManager {
@@ -12,6 +10,8 @@ class Person implements IInfoManager {
 	int closeLevel;//
 	int spendSumMoney;//
 	int getSumMoney;//
+	int countPlus;
+	int countMinus;
 	ArrayList<Event> eventlist = new ArrayList<Event>();//
 	Event event;
 
@@ -49,8 +49,10 @@ class Person implements IInfoManager {
 		
 		if(money < 0) {
 			this.spendSumMoney += money;
+			this.countMinus++;
 		}else {
 			this.getSumMoney += money;
+			this.countPlus++;
 		}
 	}
 
@@ -116,4 +118,45 @@ class Person implements IInfoManager {
 	public void setCloseLevel(int closeLevel) {
 		this.closeLevel = closeLevel;
 	}
+
+	@Override
+	public String toString() {
+		return "이름: " + name + ", 핸드폰번호" + phoneNumber + 
+				 ", 친밀도: " + closeLevel + ", 총 지출한 금액: " + spendSumMoney + ", 총 받은 금액: " + getSumMoney;
+				
+	}
+	
+	
+	public void suggestMoney () {
+		String str = "";
+		// System.out.println("적당한 금액을!");
+		System.out.println("받은 횟수 " +countPlus);
+		System.out.println("돈낸 횟수 " +countMinus);
+		System.out.println("총 받은 금액 "+getSumMoney);
+		System.out.println("총 지출 금액 "+spendSumMoney);
+		if (this.getSumMoney == 0 && this.spendSumMoney==0) {
+			if(this.closeLevel >= 4) {
+				str ="신사임당 2장";
+			} else {
+				str ="신사임당 1장!";
+			}
+		} else if ( this.getSumMoney==0 && this.spendSumMoney!=0) {
+			System.out.println("WARNING! 경조사에 불참할 핑계를 대십시오!");
+			str = " 내가 돈을 받는 Case";
+		} else if ( this.getSumMoney!=0 && this.spendSumMoney==0 ) {
+			int result = (int)spendSumMoney / countPlus;
+			str = ""+result+"원";
+		} else if (this.getSumMoney!=0 && this.spendSumMoney!=0) {
+			if (countPlus == countMinus) {
+				int result = (int) (spendSumMoney+getSumMoney) / 1;
+				str = ""+result+"원";
+			} else {int result = (int) (spendSumMoney+getSumMoney) / (countPlus-countMinus);
+				str = ""+result+"원";
+			}
+			
+		}
+		System.out.println("적정 금액은 "+str+" 입니다.");
+		
+	}
+	
 }
