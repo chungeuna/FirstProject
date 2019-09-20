@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Person implements IInfoManager {
+class Person implements IInfoManager{
 	Scanner scan = new Scanner(System.in);
 	String name;//
 	String phoneNumber;

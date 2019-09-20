@@ -1,4 +1,6 @@
-class Event {
+import java.io.Serializable;
+
+class Event implements Serializable{
 	String kindOfEvent;
 	int getMoney;
 	int spendMoney;

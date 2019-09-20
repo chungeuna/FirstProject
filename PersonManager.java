@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -5,7 +6,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-public class PersonManager implements IInfoManager {
+public class PersonManager implements IInfoManager, Serializable {
 	Scanner scan;
 	Person person;
 	private ArrayList<Person> personList;

@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Menu {
+public class Menu implements Serializable{
 	Scanner sc = new Scanner(System.in);
 	//PersonManager personManager = new PersonManager();
 	
@@ -9,10 +10,11 @@ public class Menu {
 	
 	
 	int selectMainDisplay() {
+		//main.loadUserFile();
 		System.out.println("────────────────────────────────────");
 		System.out.println("1:회원가입     2:로그인    0:프로그램 종료");
 		System.out.println("────────────────────────────────────");
-
+		
 		int menuUserInput = 0;
 		do {
 			try {
@@ -36,11 +38,15 @@ public class Menu {
 			case 1:	 this.main.signIn(); // 회원가입 함수 호출
 				break;
 			case 2:	 this.main.logIn();// 로그인 함수 호출
-					
-			
 				showPersonManagerDisplay();
 				break;
 			case 0:	System.out.println("프로그램 종료합니다");
+			if(this.main.pmMap.isEmpty()) {
+				System.out.println("저장된 정보 없음");
+			}else {
+				this.main.saveFile2();
+			}
+				
 				System.exit(0);
 			default : 
 				System.out.println("잘못된 값을 입력하셨습니다. 다시입력하세요.");
@@ -87,17 +93,22 @@ public class Menu {
 				break;
 			case 6:	this.main.setPassword(); // 비밀번호 변경
 				break;
-			case 0:	 System.out.println("사용해주셔서 감사합니다."); // 로그아웃 + (자동저장)
+			case 0:	 System.out.println("사용해주셔서 감사합니다.");// 로그아웃 + (자동저장)
+				//main.saveFile();
+				//main.saveFile2();
 				shouldExit = true;
 				break;
 			default : 
 				System.out.println("잘못된 값을 입력하셨습니다. 다시입력하세요.");
 			}
 			if (shouldExit) {
+				
+				
 				break;
 			}
 			
 		}
+		
 	}
 
 	int selectEventManagingDisplay() {
