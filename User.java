@@ -2,6 +2,7 @@ import java.io.Serializable;
 import java.util.regex.Pattern;
 
 public class User implements Serializable{
+	
 	private String id;
 	private String password;
 

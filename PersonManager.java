@@ -7,42 +7,41 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class PersonManager implements IInfoManager, Serializable {
-	Scanner scan;
+	
+	static transient Scanner scan;
 	Person person;
+	
 	private ArrayList<Person> personList;
-	//private String password;
 	private int spendTotalSum;
 	int getTotalSum;
 	Menu m;
 
 	PersonManager() {
 		scan = new Scanner(System.in);
-		personList = new ArrayList<Person>(); // ÁöÀÎ Á¤º¸ ÀúÀå
+		personList = new ArrayList<Person>();
 		m = new Menu();
-
 	}
 	
 	void menu() {
 		m.showPersonManagerDisplay();
-		//System.out.println("1.Ãß°¡ 2.»èÁ¦  3. ¼öÁ¤");
 	}
 
 	void inputPersonInfo() {
-		System.out.println("ÁöÀÎÀÇ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä : ");
+		scan = new Scanner(System.in);
+		System.out.println("ì§€ì¸ì˜ ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš” : ");
 		String name = scan.nextLine();
-		System.out.println("ÇÚµåÆù ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
+		System.out.println("í•¸ë“œí° ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
 		String phoneNumber = scan.nextLine();
-		System.out.println("»ó´ë¿ÍÀÇ °ü°èÁ¤µµ¸¦ ÀÔ·ÂÇÏ¼¼¿ä (1 - 5) : ");
+		System.out.println("ìƒëŒ€ì™€ì˜ ê´€ê³„ì •ë„ë¥¼ ì…ë ¥í•˜ì„¸ìš” (1 - 5) : ");
 		int closeLevel = Integer.parseInt(scan.nextLine());
 
-		personList.add(new Person(name, closeLevel, phoneNumber)); // ÁöÀÎÀÇ ÀÌ¸§, ÇÚµåÆù¹øÈ£, Ä£¹Ğµµ¸¦ ÀÔ·Â¹Ş¾Æ
-																	// ÇÚµåÆù¹øÈ£¸¦ Å°°ªÀ¸·Î .. ÀÌ¸§, Ä£¹Ğµµ¸¦ ¹ë·ù°ª ¼³Á¤
-
+		personList.add(new Person(name, closeLevel, phoneNumber)); // ì§€ì¸ì˜ ì´ë¦„, í•¸ë“œí°ë²ˆí˜¸, ì¹œë°€ë„ë¥¼ ì…ë ¥ë°›ì•„
 	}
 
 	@Override
 	public void inputInfo() {
-		System.out.println("ÁöÀÎÀÇ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä");
+		scan = new Scanner(System.in);
+		System.out.println("ì§€ì¸ì˜ ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”");
 		String name = scan.nextLine();
 
 		for (Person p : personList) {
@@ -54,7 +53,8 @@ public class PersonManager implements IInfoManager, Serializable {
 	
 
 	public void eventlist() {
-		System.out.println("ÁöÀÎÀÇ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä");
+		scan = new Scanner(System.in);
+		System.out.println("ì§€ì¸ì˜ ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”");
 		String name = scan.nextLine();
 
 		for (Person p : personList) {
@@ -65,59 +65,52 @@ public class PersonManager implements IInfoManager, Serializable {
 	}
 	
 	public void suggestMoney() {
-		System.out.println("ÁöÀÎÀÇ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä");
+		scan = new Scanner(System.in);
+		System.out.println("ì§€ì¸ì˜ ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”");
 		String name = scan.nextLine();
 		
 		for (Person p : personList) {
 			if (p.name.equals(name)) {
 				p.suggestMoney();
 			} else if (p.eventlist.isEmpty()) {
-				System.out.println("¾Ÿ½¼ ¹¾´ÏÀú ½áÁâšÀÀ¸ ÇÔ¼ö ¾È ½Å»çÀÓ´ç 1Àå!");
+				System.out.println("<í’œìŠ¨ ë­¬ë‹ˆì € ì¨ì¤´ÂšìŠ½ìœ¼> í•¨ìˆ˜ ì•ˆ ì‹ ì‚¬ì„ë‹¹ 1ì¥!");
 			}
 		}
 	}
 	
-	
 	public void getTotal() {
 		int sumOfexpense =0;
 		int sumOfincome =0;
+		
 		for (Person p : personList) {
 			sumOfexpense+=p.spendSumMoney;
 			sumOfincome +=p.getSumMoney;
-			
 		}
+		
 		this.getTotalSum = sumOfincome;
 		this.spendTotalSum = sumOfexpense;
 				
-		System.out.println("ÃÑ ¹ŞÀº±İ¾×: " + getTotalSum);
-		System.out.println("ÃÑ ÁöÃâÇÑ ±İ¾×: " + spendTotalSum);
+		System.out.println("ì´ ë°›ì€ê¸ˆì•¡: " + getTotalSum);
+		System.out.println("ì´ ì§€ì¶œí•œ ê¸ˆì•¡: " + spendTotalSum);
 	}
 	
 	public void showAllInfo() {
 		for(int i =0; i < personList.size(); i++) {
-			System.out.println("¹øÈ£ : " + i + " / " + personList.get(i));
+			System.out.println("ë²ˆí˜¸ : " + i + " / " + personList.get(i));
 		}
-		//for (int i = 0; i < personList.size(); i++) {
-		//	personList.get(i).showAllEvent();
-		//}
 	}
 	
-	/*
-	 * for(Map.Entry m : personMap.entrySet()) { for(Event event :
-	 * ((Person)m.getValue()).eventMap) { // ¾îÂ°Å¸°í µé¾î°©´Ï±î~
-	 * 
-	 * } }
-	 */
 	@Override
 	public void modifyInfo() {
+		scan = new Scanner(System.in);
 		
 		for(int i =0; i < personList.size(); i++) {
-			System.out.println("¹øÈ£ : " + i + " / " + personList.get(i));
+			System.out.println("ë²ˆí˜¸ : " + i + " / " + personList.get(i));
 		}
-		System.out.println("Ä£¹Ğµµ¸¦ ¼öÁ¤ÇÒ ÁöÀÎÀÇ ¹øÈ£?");
+		System.out.println("ì¹œë°€ë„ë¥¼ ìˆ˜ì •í•  ì§€ì¸ì˜ ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
 		int inputNumber = scan.nextInt();
 		scan.nextLine();
-		System.out.println("¼öÁ¤ÇÒ Ä£¹Ğµµ¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+		System.out.println("ìˆ˜ì •í•  ì¹œë°€ë„ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
 		int closeLevel = scan.nextInt();
 		
 		personList.get(inputNumber).setCloseLevel(closeLevel);
@@ -125,7 +118,8 @@ public class PersonManager implements IInfoManager, Serializable {
 
 	@Override
 	public void searchInfo() {
-		System.out.println("°Ë»öÇÒ ÇÚµåÆù ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
+		scan = new Scanner(System.in);
+		System.out.println("ê²€ìƒ‰í•  í•¸ë“œí° ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
 		String phoneNumber = scan.nextLine();
 		ArrayList<Person> plist = new ArrayList<Person>();
 		
@@ -135,39 +129,40 @@ public class PersonManager implements IInfoManager, Serializable {
 			}
 		}
 		if (plist.size() == 0) {
-			System.out.println("ÇØ´ç ÇÚµåÆù ¹øÈ£ÀÇ Á¤º¸°¡ ¾ø½À´Ï´Ù");
+			System.out.println("í•´ë‹¹ í•¸ë“œí° ë²ˆí˜¸ì˜ ì •ë³´ê°€ ì—†ìŠµë‹ˆë‹¤");
 		} else {
 			System.out.println(plist);
 		}
 		/*
-		 * System.out.println("°Ë»öÇÒ ³¯Â¥¸¦ ÀÔ·ÂÇÏ¼¼¿ä : "); String date = scan.nextLine();
+		 * System.out.println("ê²€ìƒ‰í•  ë‚ ì§œë¥¼ ì…ë ¥í•˜ì„¸ìš” : "); String date = scan.nextLine();
 		 * ArrayList<Event> alist = new ArrayList<Event>();
 		 * 
 		 * for (int i = 0; i < eventMap.size(); i++) { if
 		 * ((eventMap.get(i).date.equals(date))) { alist.add(eventMap.get(i)); } }
 		 * 
-		 * if (alist.size() == 0) { System.out.println("ÇØ´ç ³¯Â¥ÀÇ Á¤º¸°¡ ¾ø½À´Ï´Ù"); } else {
+		 * if (alist.size() == 0) { System.out.println("í•´ë‹¹ ë‚ ì§œì˜ ì •ë³´ê°€ ì—†ìŠµë‹ˆë‹¤"); } else {
 		 * System.out.println(alist); }
 		 */
 	}
 
 	@Override
 	public void removeInfo() {
+		scan = new Scanner(System.in);
 		for(int i=0; i < personList.size(); i++) {
-			System.out.println("¹øÈ£ : " + i + " / " + personList.get(i));
+			System.out.println("ë²ˆí˜¸ : " + i + " / " + personList.get(i));
 		}
-		System.out.println("Áö¿ï ÀÌº¥Æ® ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä!");
+		System.out.println("ì§€ìš¸ ì´ë²¤íŠ¸ ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”!");
 		int inputNumber = scan.nextInt();
-		personList.remove(inputNumber); // °£Á¢ÀûÀ¸·Î Á¢±Ù
-		System.out.println("»èÁ¦ µÇ¾ú½À´Ï´Ù");
+		personList.remove(inputNumber); // ê°„ì ‘ì ìœ¼ë¡œ ì ‘ê·¼
+		System.out.println("ì‚­ì œ ë˜ì—ˆìŠµë‹ˆë‹¤");
 		/*
 		 * Set set = eventMap.keySet(); Iterator it = set.iterator();
 		 * //while(it.hasNext()) { // System.out.println(eventMap.get(it.next())); //}
-		 * for(Map.Entry m : eventMap.entrySet()) { System.out.println("¹øÈ£ : " +
+		 * for(Map.Entry m : eventMap.entrySet()) { System.out.println("ë²ˆí˜¸ : " +
 		 * m.getKey() + " / " + (Event)m.getValue()); }
-		 * System.out.println("Áö¿ï ÀÌº¥Æ® ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä!"); int inputNumber = scan.nextInt();
-		 * eventMap.keySet().remove((inputNumber)); // °£Á¢ÀûÀ¸·Î Á¢±Ù
-		 * System.out.println("»èÁ¦ µÇ¾ú½À´Ï´Ù");
+		 * System.out.println("ì§€ìš¸ ì´ë²¤íŠ¸ ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”!"); int inputNumber = scan.nextInt();
+		 * eventMap.keySet().remove((inputNumber)); // ê°„ì ‘ì ìœ¼ë¡œ ì ‘ê·¼
+		 * System.out.println("ì‚­ì œ ë˜ì—ˆìŠµë‹ˆë‹¤");
 		 */
 	}
 

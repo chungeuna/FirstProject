@@ -1,11 +1,13 @@
 import java.io.Serializable;
 
 class Event implements Serializable{
+	
 	String kindOfEvent;
+	String date;
 	int getMoney;
 	int spendMoney;
-	String date;
-	//int price;
+
+	
 	Event(String date, int money, String kindOfEvent){
 		this.kindOfEvent = kindOfEvent;
 		if(money < 0) {

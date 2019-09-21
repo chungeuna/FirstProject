@@ -2,15 +2,14 @@ import java.io.Serializable;
 import java.util.Scanner;
 
 public class Menu implements Serializable{
-	Scanner sc = new Scanner(System.in);
-	//PersonManager personManager = new PersonManager();
+	
+	static transient Scanner sc = new Scanner(System.in);
 	
 	Main main = new Main();
 
-	
-	
 	int selectMainDisplay() {
-		//main.loadUserFile();
+		main.loadUserList();
+		System.out.println("메뉴에서 첫번째 확인 : " +main.userMap.toString());
 		System.out.println("────────────────────────────────────");
 		System.out.println("1:회원가입     2:로그인    0:프로그램 종료");
 		System.out.println("────────────────────────────────────");
@@ -35,16 +34,17 @@ public class Menu implements Serializable{
 	void showMainDisplay() {
 		while (true) {
 			switch (selectMainDisplay()) {
-			case 1:	 this.main.signIn(); // 회원가입 함수 호출
+			case 1:	 this.main.signIn();	 // 회원가입 함수 호출
 				break;
-			case 2:	 this.main.logIn();// 로그인 함수 호출
+			case 2:	 this.main.logIn();		// 로그인 함수 호출
+				main.loadPersonEventList();		// 로그인한 회원의 이벤트나 지인 리스트 로드. 여기서 뻑납니다
 				showPersonManagerDisplay();
 				break;
 			case 0:	System.out.println("프로그램 종료합니다");
 			if(this.main.pmMap.isEmpty()) {
 				System.out.println("저장된 정보 없음");
 			}else {
-				this.main.saveFile2();
+				// this.main.saveFile2();
 			}
 				
 				System.exit(0);
@@ -81,34 +81,29 @@ public class Menu implements Serializable{
 		while (true) {
 			int userInput = selectPersonManagerDisplay();
 			switch (userInput) {
-			case 1:	this.main.pmMap.get(this.main.getLoginId()).showAllInfo();// 전체지인목록출력
+			case 1: this.main.pmMap.get(this.main.getLoginId()).showAllInfo();	// 전체지인목록출력
 				break;
-			case 2:	this.main.pmMap.get(this.main.getLoginId()).inputPersonInfo(); // 지인정보입력
+			case 2: this.main.pmMap.get(this.main.getLoginId()).inputPersonInfo();	// 지인정보입력
 				break;
-			case 3:	this.main.pmMap.get(this.main.getLoginId()).modifyInfo();// 지인정보수정
+			case 3:	this.main.pmMap.get(this.main.getLoginId()).modifyInfo(); 	// 지인정보수정
 				break;
-			case 4:	this.main.pmMap.get(this.main.getLoginId()).removeInfo(); // 지인정보삭제
+			case 4:	this.main.pmMap.get(this.main.getLoginId()).removeInfo();	 // 지인정보삭제
 				break;
-			case 5:	this.showEventManagingDisplay(); // 이벤트 관리
+			case 5:	this.showEventManagingDisplay();	 // 이벤트 관리
 				break;
-			case 6:	this.main.setPassword(); // 비밀번호 변경
+			case 6:	this.main.setPassword(); 	// 비밀번호 변경
 				break;
-			case 0:	 System.out.println("사용해주셔서 감사합니다.");// 로그아웃 + (자동저장)
-				//main.saveFile();
-				//main.saveFile2();
+			case 0:	 System.out.println("사용해주셔서 감사합니다."); 	// 로그아웃 + 자동저장
+				this.main.savePersonEventList();
 				shouldExit = true;
 				break;
 			default : 
 				System.out.println("잘못된 값을 입력하셨습니다. 다시입력하세요.");
 			}
-			if (shouldExit) {
-				
-				
+			if (shouldExit) {				
 				break;
 			}
-			
 		}
-		
 	}
 
 	int selectEventManagingDisplay() {
@@ -136,19 +131,17 @@ public class Menu implements Serializable{
 		boolean shouldExit = false;
 		while (true) {
 			switch (selectEventManagingDisplay()) {
-			case 1:	this.main.pmMap.get(this.main.getLoginId()).eventlist();// 1:전체 이벤트목록 출력
+			case 1:	this.main.pmMap.get(this.main.getLoginId()).eventlist();	// 1:전체 이벤트목록 출력
 				break;
-			case 2: this.main.pmMap.get(this.main.getLoginId()).inputInfo();// 2:이벤트 입력
-			// 2:이벤트 입력
+			case 2: this.main.pmMap.get(this.main.getLoginId()).inputInfo();	// 2:이벤트 입력
 				break;
-			case 3:	this.main.pmMap.get(this.main.getLoginId()).modifyInfo();// 3:이벤트정보 변경
+			case 3:	this.main.pmMap.get(this.main.getLoginId()).modifyInfo();	// 3:이벤트정보 변경
 				break;
-			case 4:	this.main.pmMap.get(this.main.getLoginId()).removeInfo(); // 4.이벤트 삭제 
+			case 4:	this.main.pmMap.get(this.main.getLoginId()).removeInfo();	// 4.이벤트 삭제 
 				break;
-			case 5:	this.main.pmMap.get(this.main.getLoginId()).suggestMoney();	 // 5.적정 경보사비 출력 
-			break;
-			
-			case 0:	// 0. 뒤로가기
+			case 5:	this.main.pmMap.get(this.main.getLoginId()).suggestMoney();	// 5.적정 경보사비 출력 
+				break;
+			case 0:		// 0. 뒤로가기
 				shouldExit = true;
 				break;
 			default : 
@@ -157,6 +150,7 @@ public class Menu implements Serializable{
 			if (shouldExit){
 				break;
 			}
-		}//
+		}
 	}
+	
 }

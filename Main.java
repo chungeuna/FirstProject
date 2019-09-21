@@ -1,23 +1,31 @@
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
 import java.io.FileOutputStream;
-import java.io.IOException;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
-public class Main {
+public class Main implements Serializable {
+	
+	static transient Scanner scan = new Scanner(System.in);
 	HashMap<String, String> userMap = new HashMap<String, String>();
-	Scanner scan = new Scanner(System.in);
-	User user;
 	HashMap<String, PersonManager> pmMap = new HashMap<String, PersonManager>();
+	
+	private String loginId = "";
+	User user;
 	PersonManager pm;
-	String filePath = "C:\\IOTemp";
-	private static String loginId = "";
+	
+	String filePath = "C:\\zProject";
+	String userfilesPath = "C:\\zProject\\User";
 
 	void signIn() { // 회원가입시 아이디와 패스워드를 받는다
 		System.out.println("아이디와 패스워드를 입력하세요.");
@@ -43,18 +51,18 @@ public class Main {
 				System.out.println("형식에 맞지 않는 패스 워드입니다. 다시 입력하세요.");
 			} else {
 				userMap.put(user.getId(), user.getPassword());
+				loginId = userId;
+				saveUserList();		// 리스트 저장
+				savePersonEventList(); // User Path에 파일 생성
 				System.out.println("회원가입이 완료되었습니다.");
-
+					
 				break;
 			}
 		}
 		
 	}
 
-	void logIn() {// 아이디가 있는 회원 로그인 함수 //IO 파일 유저 해쉬맵로드하는 함수 추가
-
-		// I/O 유저 퍼슨 매니져 해쉬맵 부러와야 함
-
+	String logIn() { 
 		System.out.println("아이디와 패스워드를 입력하세요.");
 		while (true) {
 			System.out.print("아이디 : ");
@@ -68,17 +76,12 @@ public class Main {
 			} else {
 				System.out.println("로그인 되었습니다.");
 				loginId = inputId;
-				
-				break;
+				loadPersonEventList(); 		// 이건 잘됩니다!
+				return loginId;
 			}
 		}
-		
 	}
-/*
-	void loadFile(String str) {
-		pmMap.get(str).menu();
-	}
-*/
+
 	void logOut() {
 		// 로그 아웃 할 시 유저, 퍼슨 매니져 해쉬맵 파일 저장...
 	}
@@ -91,26 +94,30 @@ public class Main {
 			System.out.println("형식에 맞지 않는 비밀번호입니다. 비밀번호를 다시 설정하세요!");
 		} else {
 			userMap.put(loginId, password);
+			saveUserList();
 			System.out.println("변경되었습니다");
 		}
-
 	}
 
-	public static String getLoginId() {
+	public String getLoginId() {
 		return loginId;
 	}
 
-	void saveFile() {
+	void saveUserList() {		// 회원 리스트만 출력 하면서~ 저장
 		File file = new File("User.txt");
 
 		try {
-			FileOutputStream fos = new FileOutputStream(filePath + "\\User.txt", true);
+			FileOutputStream fos = new FileOutputStream(filePath + "\\User.txt", false);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
 			oos.writeObject(userMap);
 			
 			oos.close();
 			fos.close();
+			
+			System.out.printf("Serialized HashMap data is saved in hashmap.ser");
+	         
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -119,41 +126,70 @@ public class Main {
 
 	}
 
-	void saveFile2() {
-
-		File file2 = new File("PersonManager.txt");
+	void loadUserList() {		// 회원 리스트 로드 받는것 잘됨 근데 그쪽으로 들어가면 nullpointexception 뜹니다!
+		
 		try {
-			FileOutputStream fos2 = new FileOutputStream(file2);
-			//BufferedOutputStream bos = new BufferedOutputStream(fos2);
-			ObjectOutputStream oos2 = new ObjectOutputStream(fos2);
 
-			oos2.writeObject(pmMap);
-
+			userMap = new HashMap<String, String>();
 			
-			oos2.close();
-			// bos.close();
-			fos2.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			System.out.println("저장되었습니다.");
-		}
-	}
-
-	void loadUserFile() {
-		try {
-			FileInputStream fis = new FileInputStream(filePath + "\\User.txt");
-			ObjectInputStream ois = new ObjectInputStream(fis);
+			FileInputStream fis = new FileInputStream(filePath +"\\User.txt");
+			BufferedInputStream bis = new BufferedInputStream(fis);
+			ObjectInputStream ois = new ObjectInputStream(bis);
 			
-			userMap = (HashMap) ois.readObject();
+			userMap = (HashMap)ois.readObject();
 
 			ois.close();
 			fis.close();
 		} catch (Exception e) {
 
 		}
+		
+		System.out.println("Deserialized HashMap");
+	    Set set = userMap.entrySet();
+	    Iterator iterator = set.iterator();
+	    while(iterator.hasNext()) {
+	    	Map.Entry userMap = (Map.Entry)iterator.next();
+	    	System.out.println("key: "+ userMap.getKey() + " & Value: "+userMap.getValue());
+	    }
+	}
+
+	void savePersonEventList() {
+
+		File file = new File("\\"+loginId+".txt");
+		
+		try {
+			FileOutputStream fos = new FileOutputStream(userfilesPath+file);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+			oos.writeObject(pmMap);
+			
+			oos.close();
+			fos.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("저장되었습니다.");
+		}
+	}
+	
+	void loadPersonEventList() {
+		File file = new File("C:\\zProject\\User\\"+loginId+".txt");
+		
+		try {
+			FileInputStream fis = new FileInputStream("C:\\zProject\\User\\"+loginId+".txt");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			
+			pmMap = (HashMap)ois.readObject();
+
+			ois.close();
+			fis.close();
+			
+		} catch (Exception e) {
+
+		}
 
 	}
+
 
 }
