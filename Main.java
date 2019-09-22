@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+
 public class Main implements Serializable {
 	
 	static transient Scanner scan = new Scanner(System.in);
@@ -24,37 +26,46 @@ public class Main implements Serializable {
 	User user;
 	PersonManager pm;
 	
-	String filePath = "C:\\zProject";
-	String userfilesPath = "C:\\zProject\\User";
+	//String filePath = "C:\\zProject";
+	//String userfilesPath = "C:\\zProject\\User";
+	
+	Main(){
+		loadUserList();
+		loadPersonEventList();
+	}
 
-	void signIn() { // È¸¿ø°¡ÀÔ½Ã ¾ÆÀÌµğ¿Í ÆĞ½º¿öµå¸¦ ¹Ş´Â´Ù
-		System.out.println("¾ÆÀÌµğ¿Í ÆĞ½º¿öµå¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+	void signIn() { // íšŒì›ê°€ì…ì‹œ ì•„ì´ë””ì™€ íŒ¨ìŠ¤ì›Œë“œë¥¼ ë°›ëŠ”ë‹¤
+		System.out.println("ì•„ì´ë””ì™€ íŒ¨ìŠ¤ì›Œë“œë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 		while (true) {
-			System.out.println("ÀÌ¸ŞÀÏ·Î °¡ÀÔÇÏ¼¼¿ä.");
-			System.out.print("¾ÆÀÌµğ : ");
-			String userId = scan.nextLine();
-			pm = new PersonManager();
-			pmMap.put(userId, pm);
+			//System.out.println("ì´ë©”ì¼ë¡œ ê°€ì…í•˜ì„¸ìš”.");
+			//System.out.print("ì•„ì´ë”” : ");
+			//String userId = scan.nextLine();
+			
+			//pm = new PersonManager();
+			//pmMap.put(userId, pm);
 
 			user = new User();
 			user.setId(userId);
-			System.out.println("8ÀÚ¸® ÀÌ»ó ¿µ¹®ÀÚ¿Í ¼ıÀÚ·Î ¸¸µå¼¼¿ä.");
-			System.out.print("ÆĞ½º¿öµå : ");
-			user.setPassword(scan.nextLine().trim());
-
+			//System.out.println("8ìë¦¬ ì´ìƒ ì˜ë¬¸ìì™€ ìˆ«ìë¡œ ë§Œë“œì„¸ìš”. ");
+			//System.out.print("íŒ¨ìŠ¤ì›Œë“œ : ");
+			//user.setPassword(scan.nextLine().trim());
+			String passWord = JOptionPane.showInputDialog("8ìë¦¬ ì´ìƒ ì˜ë¬¸ìì™€ ìˆ«ìë¡œ ë§Œë“œì„¸ìš”. \níŒ¨ìŠ¤ì›Œë“œ : ");
+			user.setPassword(passWord);
+			
 			if (!user.valID(user.getId())) {
-				System.out.println("Çü½Ä¿¡ ¸ÂÁö ¾Ê´Â ¾ÆÀÌµğÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä.");
+				System.out.println("í˜•ì‹ì— ë§ì§€ ì•ŠëŠ” ì•„ì´ë””ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš”.");
 
 			} else if (userMap.containsKey(user.getId())) {
-				System.out.println("ÀÌ¹Ì Á¸ÀçÇÏ´Â ¾ÆÀÌµğÀÔ´Ï´Ù.");
+				System.out.println("ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ì•„ì´ë””ì…ë‹ˆë‹¤.");
 			} else if (!user.valPassword(user.getPassword())) {
-				System.out.println("Çü½Ä¿¡ ¸ÂÁö ¾Ê´Â ÆĞ½º ¿öµåÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä.");
+				System.out.println("í˜•ì‹ì— ë§ì§€ ì•ŠëŠ” íŒ¨ìŠ¤ ì›Œë“œì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš”.");
 			} else {
 				userMap.put(user.getId(), user.getPassword());
+				pmMap.put(userId, new PersonManager());
 				loginId = userId;
-				saveUserList();		// ¸®½ºÆ® ÀúÀå
-				savePersonEventList(); // User Path¿¡ ÆÄÀÏ »ı¼º
-				System.out.println("È¸¿ø°¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+				saveUserList();		// ë¦¬ìŠ¤íŠ¸ ì €ì¥
+				savePersonEventList(); // User Pathì— íŒŒì¼ ìƒì„±
+				System.out.println("íšŒì›ê°€ì…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 					
 				break;
 			}
@@ -63,39 +74,42 @@ public class Main implements Serializable {
 	}
 
 	String logIn() { 
-		System.out.println("¾ÆÀÌµğ¿Í ÆĞ½º¿öµå¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+		System.out.println("ì•„ì´ë””ì™€ íŒ¨ìŠ¤ì›Œë“œë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 		while (true) {
-			System.out.print("¾ÆÀÌµğ : ");
+			System.out.print("ì•„ì´ë”” : ");
 			String inputId = scan.nextLine();
-			System.out.println("ÆĞ½º¿öµå : ");
+			System.out.println("íŒ¨ìŠ¤ì›Œë“œ : ");
 			String inputPassword = scan.nextLine();
 			if (!userMap.containsKey(inputId)) {
-				System.out.println("Á¸ÀçÇÏÁö ¾Ê´Â È¸¿øÀÔ´Ï´Ù.");
+				System.out.println("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” íšŒì›ì…ë‹ˆë‹¤.");
 			} else if (!userMap.get(inputId).equals(inputPassword)) {
-				System.out.println("ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+				System.out.println("ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			} else {
-				System.out.println("·Î±×ÀÎ µÇ¾ú½À´Ï´Ù.");
+				System.out.println("ë¡œê·¸ì¸ ë˜ì—ˆìŠµë‹ˆë‹¤.");
 				loginId = inputId;
-				loadPersonEventList(); 		// ÀÌ°Ç ÀßµË´Ï´Ù!
+				//loadPersonEventList(); 		// ì´ê±´ ì˜ë©ë‹ˆë‹¤!
 				return loginId;
 			}
 		}
 	}
 
 	void logOut() {
-		// ·Î±× ¾Æ¿ô ÇÒ ½Ã À¯Àú, ÆÛ½¼ ¸Å´ÏÁ® ÇØ½¬¸Ê ÆÄÀÏ ÀúÀå...
+		
+		saveUserList();		// ë¦¬ìŠ¤íŠ¸ ì €ì¥
+		savePersonEventList();
+		// ë¡œê·¸ ì•„ì›ƒ í•  ì‹œ ìœ ì €, í¼ìŠ¨ ë§¤ë‹ˆì ¸ í•´ì‰¬ë§µ íŒŒì¼ ì €ì¥...
 	}
 
 	void setPassword() {
 
-		System.out.println("º¯°æÇÒ ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+		System.out.println("ë³€ê²½í•  ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”");
 		String password = scan.nextLine();
 		if (!user.valPassword(password)) {
-			System.out.println("Çü½Ä¿¡ ¸ÂÁö ¾Ê´Â ºñ¹Ğ¹øÈ£ÀÔ´Ï´Ù. ºñ¹Ğ¹øÈ£¸¦ ´Ù½Ã ¼³Á¤ÇÏ¼¼¿ä!");
+			System.out.println("í˜•ì‹ì— ë§ì§€ ì•ŠëŠ” ë¹„ë°€ë²ˆí˜¸ì…ë‹ˆë‹¤. ë¹„ë°€ë²ˆí˜¸ë¥¼ ë‹¤ì‹œ ì„¤ì •í•˜ì„¸ìš”!");
 		} else {
 			userMap.put(loginId, password);
 			saveUserList();
-			System.out.println("º¯°æµÇ¾ú½À´Ï´Ù");
+			System.out.println("ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤");
 		}
 	}
 
@@ -103,11 +117,11 @@ public class Main implements Serializable {
 		return loginId;
 	}
 
-	void saveUserList() {		// È¸¿ø ¸®½ºÆ®¸¸ Ãâ·Â ÇÏ¸é¼­~ ÀúÀå
+	void saveUserList() {		// íšŒì› ë¦¬ìŠ¤íŠ¸ë§Œ ì¶œë ¥ í•˜ë©´ì„œ~ ì €ì¥
 		File file = new File("User.txt");
 
 		try {
-			FileOutputStream fos = new FileOutputStream(filePath + "\\User.txt", false);
+			FileOutputStream fos = new FileOutputStream(file, false);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
 			oos.writeObject(userMap);
@@ -121,18 +135,18 @@ public class Main implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			System.out.println("È¸¿ø Á¤º¸°¡ ÀúÀåµÇ¾ú½À´Ï´Ù.");
+			System.out.println("íšŒì› ì •ë³´ê°€ ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤.");
 		}
 
 	}
 
-	void loadUserList() {		// È¸¿ø ¸®½ºÆ® ·Îµå ¹Ş´Â°Í ÀßµÊ ±Ùµ¥ ±×ÂÊÀ¸·Î µé¾î°¡¸é nullpointexception ¶å´Ï´Ù!
-		
+	void loadUserList() {		// íšŒì› ë¦¬ìŠ¤íŠ¸ ë¡œë“œ ë°›ëŠ”ê²ƒ ì˜ë¨ ê·¼ë° ê·¸ìª½ìœ¼ë¡œ ë“¤ì–´ê°€ë©´ nullpointexception ëœ¹ë‹ˆë‹¤!
+		File file = new File("User.txt");
 		try {
 
 			userMap = new HashMap<String, String>();
 			
-			FileInputStream fis = new FileInputStream(filePath +"\\User.txt");
+			FileInputStream fis = new FileInputStream(file);
 			BufferedInputStream bis = new BufferedInputStream(fis);
 			ObjectInputStream ois = new ObjectInputStream(bis);
 			
@@ -154,11 +168,13 @@ public class Main implements Serializable {
 	}
 
 	void savePersonEventList() {
+		File file = new File("PersonList.txt");
 
-		File file = new File("\\"+loginId+".txt");
+		//File file = new File(userfilesPath+ "\\"+loginId+".txt");
+		
 		
 		try {
-			FileOutputStream fos = new FileOutputStream(userfilesPath+file);
+			FileOutputStream fos = new FileOutputStream(file);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
 			oos.writeObject(pmMap);
@@ -169,15 +185,15 @@ public class Main implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			System.out.println("ÀúÀåµÇ¾ú½À´Ï´Ù.");
+			System.out.println("ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤.");
 		}
 	}
 	
 	void loadPersonEventList() {
-		File file = new File("C:\\zProject\\User\\"+loginId+".txt");
+		File file = new File("PersonList.txt");
 		
 		try {
-			FileInputStream fis = new FileInputStream("C:\\zProject\\User\\"+loginId+".txt");
+			FileInputStream fis = new FileInputStream(file);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			
 			pmMap = (HashMap)ois.readObject();

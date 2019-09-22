@@ -132,7 +132,6 @@ public class PersonManager implements IInfoManager, Serializable {
 			System.out.println("해당 핸드폰 번호의 정보가 없습니다");
 		} else {
 			System.out.println(plist);
-		}
 		/*
 		 * System.out.println("검색할 날짜를 입력하세요 : "); String date = scan.nextLine();
 		 * ArrayList<Event> alist = new ArrayList<Event>();
@@ -165,6 +164,19 @@ public class PersonManager implements IInfoManager, Serializable {
 		 * System.out.println("삭제 되었습니다");
 		 */
 	}
+	
+	public void removeEventInfo() {
+		scan = new Scanner(System.in);
+		System.out.println("지인의 이름을 입력하세요");
+		String name = scan.nextLine();
+
+		for (Person p : personList) {
+			if (p.name.equals(name)) {
+				p.removeInfo();
+			}
+		}
+	}
+	
 
 	public ArrayList<Person> getPersonList() {
 		return personList;
