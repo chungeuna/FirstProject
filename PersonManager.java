@@ -178,6 +178,19 @@ public class PersonManager implements IInfoManager, Serializable {
 		}
 	}
 	
+	public void modifyEventInfo() {
+		scan = new Scanner(System.in);
+		System.out.println("지인의 이름을 입력하세요");
+		String name = scan.nextLine();
+
+		for (Person p : personList) {
+			if (p.name.equals(name)) {
+				p.modifyInfo();
+			}
+		}
+	}
+	
+	
 
 	public ArrayList<Person> getPersonList() {
 		return personList;

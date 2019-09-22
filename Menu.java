@@ -137,7 +137,7 @@ public class Menu implements Serializable{
 				break;
 			case 2: this.main.pmMap.get(this.main.getLoginId()).inputInfo();	// 2:이벤트 입력
 				break;
-			case 3:	this.main.pmMap.get(this.main.getLoginId()).modifyInfo();	// 3:이벤트정보 변경
+			case 3:	this.main.pmMap.get(this.main.getLoginId()).modifyEventInfo();	// 3:이벤트정보 변경
 				break;
 			case 4:	this.main.pmMap.get(this.main.getLoginId()).removeEventInfo();	// 4.이벤트 삭제 
 				break;
