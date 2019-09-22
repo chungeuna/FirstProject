@@ -73,7 +73,7 @@ public class PersonManager implements IInfoManager, Serializable {
 			if (p.name.equals(name)) {
 				p.suggestMoney();
 			} else if (p.eventlist.isEmpty()) {
-				System.out.println("<풜슨 뭬니저 써줴슽으> 함수 안 신사임당 1장!");
+				System.out.println("신사임당 1장!");
 			}
 		}
 	}
@@ -151,7 +151,7 @@ public class PersonManager implements IInfoManager, Serializable {
 		for(int i=0; i < personList.size(); i++) {
 			System.out.println("번호 : " + i + " / " + personList.get(i));
 		}
-		System.out.println("지울 이벤트 번호를 입력하세요!");
+		System.out.println("삭제할 지인의 번호를 입력하세요!");
 		int inputNumber = scan.nextInt();
 		personList.remove(inputNumber); // 간접적으로 접근
 		System.out.println("삭제 되었습니다");
