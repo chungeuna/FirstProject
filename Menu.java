@@ -41,6 +41,7 @@ public class Menu implements Serializable{
 				showPersonManagerDisplay();
 				break;
 			case 0:	System.out.println("프로그램 종료합니다");
+			this.main.logOut();
 			if(this.main.pmMap.isEmpty()) {
 				System.out.println("저장된 정보 없음");
 			}else {

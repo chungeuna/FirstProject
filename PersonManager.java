@@ -11,15 +11,15 @@ public class PersonManager implements IInfoManager, Serializable {
 	static transient Scanner scan;
 	Person person;
 	
-	private ArrayList<Person> personList;
+	private ArrayList<Person> personList=new ArrayList<Person>();
 	private int spendTotalSum;
 	int getTotalSum;
 	Menu m;
 
 	PersonManager() {
-		scan = new Scanner(System.in);
-		personList = new ArrayList<Person>();
-		m = new Menu();
+		//scan = new Scanner(System.in);
+		//personList = new ArrayList<Person>();
+		//m = new Menu();
 	}
 	
 	void menu() {
@@ -142,6 +142,7 @@ public class PersonManager implements IInfoManager, Serializable {
 		 * if (alist.size() == 0) { System.out.println("해당 날짜의 정보가 없습니다"); } else {
 		 * System.out.println(alist); }
 		 */
+		}
 	}
 
 	@Override
