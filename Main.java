@@ -40,6 +40,7 @@ public class Main implements Serializable {
 			//System.out.println("이메일로 가입하세요.");
 			//System.out.print("아이디 : ");
 			//String userId = scan.nextLine();
+			String userId = JOptionPane.showInputDialog("본인 이메일로 가입하세요 \n아이디: ");
 			
 			//pm = new PersonManager();
 			//pmMap.put(userId, pm);
