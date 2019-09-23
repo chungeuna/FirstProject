@@ -9,10 +9,10 @@ public class Menu implements Serializable{
 
 	int selectMainDisplay() {
 		//main.loadUserList();
-		System.out.println("ë©”ë‰´ì—ì„œ ì²«ë²ˆì§¸ í™•ì¸ : " +main.userMap.toString());
-		System.out.println("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€");
-		System.out.println("1:íšŒì›ê°€ìž…     2:ë¡œê·¸ì¸    0:í”„ë¡œê·¸ëž¨ ì¢…ë£Œ");
-		System.out.println("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€");
+		//System.out.println("¸Þ´º¿¡¼­ Ã¹¹øÂ° È®ÀÎ : " +main.userMap.toString());
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		System.out.println("1:È¸¿ø°¡ÀÔ     2:·Î±×ÀÎ    0:ÇÁ·Î±×·¥ Á¾·á");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
 		
 		int menuUserInput = 0;
 		do {
@@ -21,11 +21,11 @@ public class Menu implements Serializable{
 				if (menuUserInput >= 0 && menuUserInput <=2) {
 					break;
 				} else {
-					throw new Exception("showMainDisplay() Method ì˜ˆì™¸ ë°œìƒ");
+					throw new Exception("showMainDisplay() Method ¿¹¿Ü ¹ß»ý");
 				}
 			} catch (Exception e) {
-				System.out.println("ì„ íƒ ë¬¸ì œ");
-				System.out.println("0~2ë²ˆê¹Œì§€ ì„ íƒ");
+				System.out.println("¼±ÅÃ ¹®Á¦");
+				System.out.println("0 - 2¹ø±îÁö ¼±ÅÃ °¡´ÉÇÕ´Ï´Ù");
 			}
 		} while (true);		
 		return menuUserInput;		
@@ -34,32 +34,31 @@ public class Menu implements Serializable{
 	void showMainDisplay() {
 		while (true) {
 			switch (selectMainDisplay()) {
-			case 1:	 this.main.signIn();	 // íšŒì›ê°€ìž… í•¨ìˆ˜ í˜¸ì¶œ
+			case 1:	 this.main.signIn();	 // È¸¿ø°¡ÀÔ ÇÔ¼ö È£Ãâ
 				break;
-			case 2:	 this.main.logIn();		// ë¡œê·¸ì¸ í•¨ìˆ˜ í˜¸ì¶œ
-				//main.loadPersonEventList();		// ë¡œê·¸ì¸í•œ íšŒì›ì˜ ì´ë²¤íŠ¸ë‚˜ ì§€ì¸ ë¦¬ìŠ¤íŠ¸ ë¡œë“œ. ì—¬ê¸°ì„œ ë»‘ë‚©ë‹ˆë‹¤
+			case 2:	 this.main.logIn();		// ·Î±×ÀÎ ÇÔ¼ö È£Ãâ
 				showPersonManagerDisplay();
 				break;
-			case 0:	System.out.println("í”„ë¡œê·¸ëž¨ ì¢…ë£Œí•©ë‹ˆë‹¤");
+			case 0:	System.out.println("ÇÁ·Î±×·¥ Á¾·áÇÕ´Ï´Ù");
 			this.main.logOut();
 			if(this.main.pmMap.isEmpty()) {
-				System.out.println("ì €ìž¥ëœ ì •ë³´ ì—†ìŒ");
+				System.out.println("ÀúÀåµÈ Á¤º¸ ¾øÀ½");
 			}else {
 				// this.main.saveFile2();
 			}
 				
 				System.exit(0);
 			default : 
-				System.out.println("ìž˜ëª»ëœ ê°’ì„ ìž…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤. ë‹¤ì‹œìž…ë ¥í•˜ì„¸ìš”.");
+				System.out.println("Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù. ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä.");
 			}
 		}
 	}
 	
 
 	int selectPersonManagerDisplay() {
-		System.out.println("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€");
-		System.out.println("1:ì§€ì¸ëª©ë¡ ì¶œë ¥ 2:ì§€ì¸ì •ë³´ ìž…ë ¥ 3:ì§€ì¸ì •ë³´ ë³€ê²½ 4.ì§€ì¸ì •ë³´ì‚­ì œ 5.ì´ë²¤íŠ¸ ê´€ë¦¬ 6.ë¹„ë°€ë²ˆí˜¸ë³€ê²½ 	0.ë¡œê·¸ì•„ì›ƒ");
-		System.out.println("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		System.out.println("1:ÁöÀÎ¸ñ·Ï Ãâ·Â 2:ÁöÀÎÁ¤º¸ ÀÔ·Â 3:ÁöÀÎÁ¤º¸ º¯°æ 4.ÁöÀÎÁ¤º¸»èÁ¦ 5.ÀÌº¥Æ® °ü¸® 6.ºñ¹Ð¹øÈ£º¯°æ 	0.·Î±×¾Æ¿ô");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
 		int menuUserInput = 0;
 		do {
 			try {
@@ -67,11 +66,11 @@ public class Menu implements Serializable{
 				if (menuUserInput >= 0 && menuUserInput <=6) {
 					break;
 				} else {
-					throw new Exception("selectPersonManagerDisplay() Method ì˜ˆì™¸ ë°œìƒ");
+					throw new Exception("selectPersonManagerDisplay() Method ¿¹¿Ü ¹ß»ý");
 				}
 			} catch (Exception e) {
-				System.out.println("ì„ íƒ ë¬¸ì œ");
-				System.out.println("0~5ë²ˆê¹Œì§€ ì„ íƒ");
+				System.out.println("¼±ÅÃ ¹®Á¦");
+				System.out.println("0~5¹ø±îÁö ¼±ÅÃ");
 			}
 		} while (true);		
 		return menuUserInput;		
@@ -82,25 +81,23 @@ public class Menu implements Serializable{
 		while (true) {
 			int userInput = selectPersonManagerDisplay();
 			switch (userInput) {
-			case 1: this.main.pmMap.get(this.main.getLoginId()).showAllInfo();	// ì „ì²´ì§€ì¸ëª©ë¡ì¶œë ¥
+			case 1: this.main.pmMap.get(this.main.getLoginId()).showAllInfo();	// ÀüÃ¼ÁöÀÎ¸ñ·ÏÃâ·Â
 				break;
-			case 2: this.main.pmMap.get(this.main.getLoginId()).inputPersonInfo();	// ì§€ì¸ì •ë³´ìž…ë ¥
+			case 2: this.main.pmMap.get(this.main.getLoginId()).inputPersonInfo();	// ÁöÀÎÁ¤º¸ÀÔ·Â
 				break;
-			case 3:	this.main.pmMap.get(this.main.getLoginId()).modifyInfo(); 	// ì§€ì¸ì •ë³´ìˆ˜ì •
+			case 3:	this.main.pmMap.get(this.main.getLoginId()).modifyInfo(); 	// ÁöÀÎÁ¤º¸¼öÁ¤
 				break;
-			case 4:	this.main.pmMap.get(this.main.getLoginId()).removeInfo();	 // ì§€ì¸ì •ë³´ì‚­ì œ
+			case 4:	this.main.pmMap.get(this.main.getLoginId()).removeInfo();	 // ÁöÀÎÁ¤º¸»èÁ¦
 				break;
-			case 5:	this.showEventManagingDisplay();	 // ì´ë²¤íŠ¸ ê´€ë¦¬
+			case 5:	this.showEventManagingDisplay();	 // ÀÌº¥Æ® °ü¸®
 				break;
-			case 6:	this.main.setPassword(); 	// ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
+			case 6:	this.main.setPassword(); 	// ºñ¹Ð¹øÈ£ º¯°æ
 				break;
-			case 0:	 System.out.println("ì‚¬ìš©í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤."); 	// ë¡œê·¸ì•„ì›ƒ + ìžë™ì €ìž¥
-				//
-			//this.main.savePersonEventList();
+			case 0:	 System.out.println("»ç¿ëÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù."); 	// ·Î±×¾Æ¿ô + ÀÚµ¿ÀúÀå
 				shouldExit = true;
 				break;
 			default : 
-				System.out.println("ìž˜ëª»ëœ ê°’ì„ ìž…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤. ë‹¤ì‹œìž…ë ¥í•˜ì„¸ìš”.");
+				System.out.println("Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù. ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä.");
 			}
 			if (shouldExit) {				
 				break;
@@ -109,9 +106,9 @@ public class Menu implements Serializable{
 	}
 
 	int selectEventManagingDisplay() {
-		System.out.println("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€");
-		System.out.println("1:ì „ì²´ ì´ë²¤íŠ¸ëª©ë¡ ì¶œë ¥ 2:ì´ë²¤íŠ¸ ìž…ë ¥ 3:ì´ë²¤íŠ¸ì •ë³´ ë³€ê²½ 4.ì´ë²¤íŠ¸ ì‚­ì œ  5.ì ì •ê²½ì¡°ì‚¬ë¹„ ì¶œë ¥ 0.ë’¤ë¡œê°€ê¸°");
-		System.out.println("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		System.out.println("1:ÀüÃ¼ ÀÌº¥Æ®¸ñ·Ï Ãâ·Â 2:ÀÌº¥Æ® ÀÔ·Â 3:ÀÌº¥Æ®Á¤º¸ º¯°æ 4.ÀÌº¥Æ® »èÁ¦  5.ÀûÁ¤°æÁ¶»çºñ Ãâ·Â 0.µÚ·Î°¡±â");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
 		int menu = 0;
 		do {
 			try {
@@ -119,11 +116,11 @@ public class Menu implements Serializable{
 				if (menu >= 0 && menu <=5) {
 					break;
 				} else {
-					throw new Exception("selectPersonManagerDisplay() Method ì˜ˆì™¸ ë°œìƒ");
+					throw new Exception("selectPersonManagerDisplay() Method ¿¹¿Ü ¹ß»ý");
 				}
 			} catch (Exception e) {
-				System.out.println("ì„ íƒ ë¬¸ì œ");
-				System.out.println("0~4ë²ˆê¹Œì§€ ì„ íƒ");
+				System.out.println("¼±ÅÃ ¹®Á¦");
+				System.out.println("0 - 4¹ø±îÁö ¼±ÅÃ °¡´ÉÇÕ´Ï´Ù");
 			}
 		} while (true);	
 		return menu;		
@@ -133,21 +130,21 @@ public class Menu implements Serializable{
 		boolean shouldExit = false;
 		while (true) {
 			switch (selectEventManagingDisplay()) {
-			case 1:	this.main.pmMap.get(this.main.getLoginId()).eventlist();	// 1:ì „ì²´ ì´ë²¤íŠ¸ëª©ë¡ ì¶œë ¥
+			case 1:	this.main.pmMap.get(this.main.getLoginId()).eventlist();	// 1:ÀüÃ¼ ÀÌº¥Æ®¸ñ·Ï Ãâ·Â
 				break;
-			case 2: this.main.pmMap.get(this.main.getLoginId()).inputInfo();	// 2:ì´ë²¤íŠ¸ ìž…ë ¥
+			case 2: this.main.pmMap.get(this.main.getLoginId()).inputInfo();	// 2:ÀÌº¥Æ® ÀÔ·Â
 				break;
-			case 3:	this.main.pmMap.get(this.main.getLoginId()).modifyEventInfo();	// 3:ì´ë²¤íŠ¸ì •ë³´ ë³€ê²½
+			case 3:	this.main.pmMap.get(this.main.getLoginId()).modifyEventInfo();	// 3:ÀÌº¥Æ®Á¤º¸ º¯°æ
 				break;
-			case 4:	this.main.pmMap.get(this.main.getLoginId()).removeEventInfo();	// 4.ì´ë²¤íŠ¸ ì‚­ì œ 
+			case 4:	this.main.pmMap.get(this.main.getLoginId()).removeEventInfo();	// 4.ÀÌº¥Æ® »èÁ¦ 
 				break;
-			case 5:	this.main.pmMap.get(this.main.getLoginId()).suggestMoney();	// 5.ì ì • ê²½ë³´ì‚¬ë¹„ ì¶œë ¥ 
+			case 5:	this.main.pmMap.get(this.main.getLoginId()).suggestMoney();	// 5.ÀûÁ¤ °æº¸»çºñ Ãâ·Â 
 				break;
-			case 0:		// 0. ë’¤ë¡œê°€ê¸°
+			case 0:		// 0. µÚ·Î°¡±â
 				shouldExit = true;
 				break;
 			default : 
-				System.out.println("ìž˜ëª»ëœ ê°’ì„ ìž…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤. ë‹¤ì‹œìž…ë ¥í•˜ì„¸ìš”.");
+				System.out.println("Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù. ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä.");
 			}
 			if (shouldExit){
 				break;

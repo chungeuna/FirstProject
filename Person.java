@@ -30,21 +30,21 @@ class Person implements IInfoManager, Serializable{
 	}
 
 	void getSum() {
-		System.out.println(this.name + "ë‹˜ì´ ë‚˜ì—ê²Œ ì¤€ ì´ ê¸ˆì•¡ : " + this.getSumMoney);
+		System.out.println(this.name + "´ÔÀÌ ³ª¿¡°Ô ÁØ ÃÑ ±İ¾× : " + this.getSumMoney);
 	}
 
 	void spendSum() {
-		System.out.println(this.name + "ë‹˜ì—ê²Œ ì¤€ ì´ ê¸ˆì•¡ : " + this.spendSumMoney);
+		System.out.println(this.name + "´Ô¿¡°Ô ÁØ ÃÑ ±İ¾× : " + this.spendSumMoney);
 	}
 
 	@Override
 	public void inputInfo() {
 		scan = new Scanner(System.in);
-		System.out.println("ë‚ ì§œë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
+		System.out.println("³¯Â¥¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
 		String date = scan.nextLine();
-		System.out.println("ê¸ˆì•¡ì„ ì…ë ¥í•˜ì„¸ìš” : ");
+		System.out.println("±İ¾×À» ÀÔ·ÂÇÏ¼¼¿ä : ");
 		int money = Integer.parseInt(scan.nextLine());
-		System.out.println("ê²½ì¡°ì‚¬ ì¢…ë¥˜ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
+		System.out.println("°æÁ¶»ç Á¾·ù¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
 		String kindOfEvent = scan.nextLine();
 		
 		eventlist.add(new Event(date, money, kindOfEvent));
@@ -62,17 +62,17 @@ class Person implements IInfoManager, Serializable{
 	public void modifyInfo() {
 		scan = new Scanner(System.in);
 		for(int i =0; i < eventlist.size(); i++) {
-			System.out.println("ë²ˆí˜¸ : " + i + " / " + eventlist.get(i));
+			System.out.println("¹øÈ£ : " + i + " / " + eventlist.get(i));
 		}
-		System.out.println("ê¸ˆì•¡ì„ ìˆ˜ì •í•˜ê³  ì‹¶ì€ ì´ë²¤íŠ¸ ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”");
+		System.out.println("±İ¾×À» ¼öÁ¤ÇÏ°í ½ÍÀº ÀÌº¥Æ® ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
 		int inputNumber = scan.nextInt();
 		scan.nextLine();
-		System.out.println("ìˆ˜ì •í•  ê¸ˆì•¡ì„ ì…ë ¥í•˜ì„¸ìš”");
-		System.out.println("ì§€ì¶œí•œ ê¸ˆì•¡: ");
+		System.out.println("¼öÁ¤ÇÒ ±İ¾×À» ÀÔ·ÂÇÏ¼¼¿ä");
+		System.out.println("ÁöÃâÇÑ ±İ¾×: ");
 		int outmoney = scan.nextInt();
 		scan.hasNextLine();
 		
-		System.out.println("ë“¤ì–´ì˜¨ ê¸ˆì•¡: ");
+		System.out.println("µé¾î¿Â ±İ¾×: ");
 		int inmoney = scan.nextInt();
 		
 		eventlist.get(inputNumber).setGetMoney(inmoney);
@@ -83,7 +83,7 @@ class Person implements IInfoManager, Serializable{
 	@Override
 	public void searchInfo() {
 		scan = new Scanner(System.in);
-		System.out.println("ê²€ìƒ‰í•  ë‚ ì§œë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
+		System.out.println("°Ë»öÇÒ ³¯Â¥¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
 		String date = scan.nextLine();
 		ArrayList<Event> alist = new ArrayList<Event>();
 		
@@ -94,7 +94,7 @@ class Person implements IInfoManager, Serializable{
 		}
 		
 		if (alist.size() == 0) {
-			System.out.println("í•´ë‹¹ ë‚ ì§œì˜ ì •ë³´ê°€ ì—†ìŠµë‹ˆë‹¤");
+			System.out.println("ÇØ´ç ³¯Â¥ÀÇ Á¤º¸°¡ ¾ø½À´Ï´Ù");
 		} else {
 			System.out.println(alist);
 		}
@@ -103,12 +103,12 @@ class Person implements IInfoManager, Serializable{
 	public void removeInfo() {
 		scan = new Scanner(System.in);
 		for(int i=0; i < eventlist.size(); i++) {
-			System.out.println("ë²ˆí˜¸ : " + i + " / " + eventlist.get(i));
+			System.out.println("¹øÈ£ : " + i + " / " + eventlist.get(i));
 		}
-		System.out.println("ì§€ìš¸ ì´ë²¤íŠ¸ ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”!");
+		System.out.println("Áö¿ï ÀÌº¥Æ® ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä!");
 		int inputNumber = scan.nextInt();
 		eventlist.remove(inputNumber);
-		System.out.println("ì‚­ì œ ë˜ì—ˆìŠµë‹ˆë‹¤");
+		System.out.println("»èÁ¦ µÇ¾ú½À´Ï´Ù");
 	}
 	
 	public void showAllEvent() {
@@ -123,8 +123,8 @@ class Person implements IInfoManager, Serializable{
 
 	@Override
 	public String toString() {
-		return "ì´ë¦„: " + name + ", í•¸ë“œí°ë²ˆí˜¸" + phoneNumber + 
-				 ", ì¹œë°€ë„: " + closeLevel + ", ì´ ì§€ì¶œí•œ ê¸ˆì•¡: " + spendSumMoney + ", ì´ ë°›ì€ ê¸ˆì•¡: " + getSumMoney;
+		return "ÀÌ¸§: " + name + ", ÇÚµåÆù¹øÈ£" + phoneNumber + 
+				 ", Ä£¹Ğµµ: " + closeLevel + ", ÃÑ ÁöÃâÇÑ ±İ¾×: " + spendSumMoney + ", ÃÑ ¹ŞÀº ±İ¾×: " + getSumMoney;
 				
 	}
 	
@@ -132,33 +132,33 @@ class Person implements IInfoManager, Serializable{
 	public void suggestMoney () {
 		String str = "";
 		
-		System.out.println("ë°›ì€ íšŸìˆ˜ " +countPlus);
-		System.out.println("ëˆë‚¸ íšŸìˆ˜ " +countMinus);
-		System.out.println("ì´ ë°›ì€ ê¸ˆì•¡ "+getSumMoney);
-		System.out.println("ì´ ì§€ì¶œ ê¸ˆì•¡ "+spendSumMoney);
+		System.out.println("¹ŞÀº È½¼ö " +countPlus);
+		System.out.println("µ·³½ È½¼ö " +countMinus);
+		System.out.println("ÃÑ ¹ŞÀº ±İ¾× "+getSumMoney);
+		System.out.println("ÃÑ ÁöÃâ ±İ¾× "+spendSumMoney);
 
 		if (this.getSumMoney == 0 && this.spendSumMoney==0) {
 			if(this.closeLevel >= 4) {
-				str ="ì‹ ì‚¬ì„ë‹¹ 2ì¥";
+				str ="½Å»çÀÓ´ç 2Àå";
 			} else {
-				str ="ì‹ ì‚¬ì„ë‹¹ 1ì¥!";
+				str ="½Å»çÀÓ´ç 1Àå!";
 			}
-		} else if ( this.getSumMoney==0 && this.spendSumMoney!=0) {		// ë°›ì€ê²ƒ 0	 ì“´ê²ƒ ìˆìŒ
-			System.out.println("WARNING! ê²½ì¡°ì‚¬ì— ë¶ˆì°¸í•  í•‘ê³„ë¥¼ ëŒ€ì‹­ì‹œì˜¤!");
-			str = " ë‚´ê°€ ëˆì„ ë°›ëŠ” Case";
-		} else if ( this.getSumMoney!=0 && this.spendSumMoney==0 ) {	// ë°›ì€ê²ƒ ìˆìŒ	 ì“´ê²ƒ 0
+		} else if ( this.getSumMoney==0 && this.spendSumMoney!=0) {		// ¹ŞÀº°Í 0	 ¾´°Í ÀÖÀ½
+			System.out.println("WARNING! °æÁ¶»ç¿¡ ºÒÂüÇÒ ÇÎ°è¸¦ ´ë½Ê½Ã¿À!");
+			str = " ³»°¡ µ·À» ¹Ş´Â Case";
+		} else if ( this.getSumMoney!=0 && this.spendSumMoney==0 ) {	// ¹ŞÀº°Í ÀÖÀ½	 ¾´°Í 0
 			int result = (int)getSumMoney / countPlus;
-			str = ""+result+"ì›";
+			str = ""+result+"¿ø";
 		} else if (this.getSumMoney!=0 && this.spendSumMoney!=0) {
 			if (countPlus == countMinus) {
 				int result = (int) (spendSumMoney+getSumMoney) / 1;
-				str = ""+result+"ì›";
+				str = ""+result+"¿ø";
 			} else {int result = (int) (spendSumMoney+getSumMoney) / (countPlus-countMinus);
-				str = ""+result+"ì›";
+				str = ""+result+"¿ø";
 			}
 			
 		}
-		System.out.println("ì ì • ê¸ˆì•¡ì€ "+str+" ì…ë‹ˆë‹¤.");
+		System.out.println("ÀûÁ¤ ±İ¾×Àº "+str+" ÀÔ´Ï´Ù.");
 		
 	}
 	

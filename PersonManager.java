@@ -17,9 +17,7 @@ public class PersonManager implements IInfoManager, Serializable {
 	Menu m;
 
 	PersonManager() {
-		//scan = new Scanner(System.in);
-		//personList = new ArrayList<Person>();
-		//m = new Menu();
+		
 	}
 	
 	void menu() {
@@ -47,6 +45,8 @@ public class PersonManager implements IInfoManager, Serializable {
 		for (Person p : personList) {
 			if (p.name.equals(name)) {
 				p.inputInfo();
+			}else {
+				System.out.println("지인의 정보가 없습니다");
 			}
 		}
 	}
@@ -132,16 +132,6 @@ public class PersonManager implements IInfoManager, Serializable {
 			System.out.println("해당 핸드폰 번호의 정보가 없습니다");
 		} else {
 			System.out.println(plist);
-		/*
-		 * System.out.println("검색할 날짜를 입력하세요 : "); String date = scan.nextLine();
-		 * ArrayList<Event> alist = new ArrayList<Event>();
-		 * 
-		 * for (int i = 0; i < eventMap.size(); i++) { if
-		 * ((eventMap.get(i).date.equals(date))) { alist.add(eventMap.get(i)); } }
-		 * 
-		 * if (alist.size() == 0) { System.out.println("해당 날짜의 정보가 없습니다"); } else {
-		 * System.out.println(alist); }
-		 */
 		}
 	}
 
@@ -155,15 +145,6 @@ public class PersonManager implements IInfoManager, Serializable {
 		int inputNumber = scan.nextInt();
 		personList.remove(inputNumber); // 간접적으로 접근
 		System.out.println("삭제 되었습니다");
-		/*
-		 * Set set = eventMap.keySet(); Iterator it = set.iterator();
-		 * //while(it.hasNext()) { // System.out.println(eventMap.get(it.next())); //}
-		 * for(Map.Entry m : eventMap.entrySet()) { System.out.println("번호 : " +
-		 * m.getKey() + " / " + (Event)m.getValue()); }
-		 * System.out.println("지울 이벤트 번호를 입력하세요!"); int inputNumber = scan.nextInt();
-		 * eventMap.keySet().remove((inputNumber)); // 간접적으로 접근
-		 * System.out.println("삭제 되었습니다");
-		 */
 	}
 	
 	public void removeEventInfo() {
@@ -189,8 +170,6 @@ public class PersonManager implements IInfoManager, Serializable {
 			}
 		}
 	}
-	
-	
 
 	public ArrayList<Person> getPersonList() {
 		return personList;

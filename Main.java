@@ -22,6 +22,7 @@ public class Main implements Serializable {
 	String userFilesPath = "C:\\Project\\User";
 
 	Main() {
+		user = new User();
 		loadUserList();
 		loadPersonEventList();
 	}
@@ -29,19 +30,12 @@ public class Main implements Serializable {
 	void signIn() { // 회원가입시 아이디와 패스워드를 받는다
 		System.out.println("아이디와 패스워드를 입력하세요.");
 		while (true) {
-			// System.out.println("이메일로 가입하세요.");
-			// System.out.print("아이디 : ");
-			// String userId = scan.nextLine();
+			
 			String userId = JOptionPane.showInputDialog("본인 이메일로 가입하세요 \n아이디: ");
-
-			// pm = new PersonManager();
-			// pmMap.put(userId, pm);
 
 			user = new User();
 			user.setId(userId);
-			// System.out.println("8자리 이상 영문자와 숫자로 만드세요. ");
-			// System.out.print("패스워드 : ");
-			// user.setPassword(scan.nextLine().trim());
+			
 			String passWord = JOptionPane.showInputDialog("8자리 이상 영문자와 숫자로 만드세요. \n패스워드 : ");
 			user.setPassword(passWord);
 
@@ -71,7 +65,7 @@ public class Main implements Serializable {
 		while (true) {
 			System.out.print("아이디 : ");
 			String inputId = scan.nextLine();
-			System.out.println("패스워드 : ");
+			System.out.print("패스워드 : ");
 			String inputPassword = scan.nextLine();
 			if (!userMap.containsKey(inputId)) {
 				System.out.println("존재하지 않는 회원입니다.");
@@ -80,7 +74,7 @@ public class Main implements Serializable {
 			} else {
 				System.out.println("로그인 되었습니다.");
 				loginId = inputId;
-				// loadPersonEventList(); // 이건 잘됩니다!
+				loadPersonEventList(); 
 				return loginId;
 			}
 		}
@@ -101,7 +95,7 @@ public class Main implements Serializable {
 			System.out.println("형식에 맞지 않는 비밀번호입니다. 비밀번호를 다시 설정하세요!");
 		} else {
 			userMap.put(loginId, password);
-			saveUserList();
+			//saveUserList();
 			System.out.println("변경되었습니다");
 		}
 	}
@@ -117,7 +111,7 @@ public class Main implements Serializable {
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}
-			// FileOutputStream fos = new FileOutputStream(file, false);
+			
 			FileOutputStream fos = new FileOutputStream(filePath + "\\" + file, false);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
@@ -125,8 +119,6 @@ public class Main implements Serializable {
 
 			oos.close();
 			fos.close();
-
-			System.out.printf("Serialized HashMap data is saved in hashmap.ser");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -136,7 +128,7 @@ public class Main implements Serializable {
 
 	}
 
-	void loadUserList() { // 회원 리스트 로드 받는것 잘됨 근데 그쪽으로 들어가면 nullpointexception 뜹니다!
+	void loadUserList() {
 		File file = new File("User.ser");
 		try {
 
@@ -154,20 +146,12 @@ public class Main implements Serializable {
 
 		}
 
-		System.out.println("Deserialized HashMap");
 		Set set = userMap.entrySet();
 		Iterator iterator = set.iterator();
-		while (iterator.hasNext()) {
-			Map.Entry userMap = (Map.Entry) iterator.next();
-			System.out.println("key: " + userMap.getKey() + " & Value: " + userMap.getValue());
-		}
 	}
 
 	void savePersonEventList() {
-		// File file = new File("PersonList.ser");
 		File file = new File(loginId + ".ser");
-
-		// File file = new File(userfilesPath+ "\\"+loginId+".txt");
 
 		try {
 			FileOutputStream fos = new FileOutputStream(userFilesPath + "\\" + file);
@@ -186,7 +170,6 @@ public class Main implements Serializable {
 	}
 
 	void loadPersonEventList() {
-		// File file = new File("PersonList.ser");
 		File file = new File(loginId + ".ser");
 
 		try {

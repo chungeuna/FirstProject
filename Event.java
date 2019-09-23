@@ -21,7 +21,7 @@ class Event implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "[í–‰ì‚¬ì¢…ë¥˜ : " + kindOfEvent + ", ë°›ì€ ê¸ˆì•¡ : " + getMoney + "ì›, "+ "  ì§€ì¶œí•œ ê¸ˆì•¡ : " + spendMoney + "ì›"+ ", date : "
+		return "[Çà»çÁ¾·ù : " + kindOfEvent + ", ¹ŞÀº ±İ¾× : " + getMoney + "¿ø, "+ "  ÁöÃâÇÑ ±İ¾× : " + spendMoney + "¿ø"+ ", ³¯Â¥ : "
 				+ date + "]";
 	}
 	
